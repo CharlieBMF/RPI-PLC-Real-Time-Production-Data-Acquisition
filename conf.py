@@ -8,12 +8,6 @@ machines_names = {
             'port': 40020,
             'target_network': None,
             'plc_id_in_target_network': None,
-            'address':
-                {
-                    'master_on_address': 'M6',
-                    'machine_status_address': 'M44',
-                    'mct_address': 'D50080',
-                },
             'endpoints': ['2D_Mark', 'Press_Fit', 'Weld', 'Brush'],
             'endpoints_data_values':
                 {
@@ -245,458 +239,1354 @@ machines_names = {
                         },
                 },
          },
-    # 'F02':
-    #     {
-    #         'id_line': 32,
-    #         'id_machine': 234,
-    #         'name': 'Stud Bolt',
-    #         'ip': '192.168.1.221',
-    #         'port': 40020,
-    #         'target_network': None,
-    #         'plc_id_in_target_network': None,
-    #         'address':
-    #             {
-    #                 'master_on_address': 'M6',
-    #                 'machine_status_address': 'M44',
-    #                 'mct_address': 'D50080',
-    #             },
-    #         'production_data':
-    #             {
-    #                 'Weld':
-    #                     {
-    #                         'Data Collection Flag': 'M300',
-    #                         'OK Report Flag': 'M301',
-    #                         'NG Report Flag': 'M302',
-    #                         'Jig No 1 Flag': 'M8611',
-    #                         'Jig No 2 Flag': 'M8610',
-    #                         '2D Code': 'W340',
-    #                         'Bolt lot': 'W370',
-    #                         'Bolt No': 'W378',
-    #                         'Jig (weld)': 'W380',
-    #                         '(1st side) Pilot Volt (V)': 'W350',
-    #                         '(1st side) Weld Volt (V)': 'W351',
-    #                         '(1st side) Weld Current (A)': 'W352',
-    #                         '(1st side) Weld Cycle (ms)': 'W353',
-    #                         '(1st side) Weld Depth (mm)': 'W354',
-    #                         '(1st side) Weld Energy (J)': 'W355',
-    #                         '(1st side) Lift (mm)': 'W356',
-    #                         '(1st side) Ta (ms)': 'W357',
-    #                         '(2nd side) Pilot Volt (V)': 'W360',
-    #                         '(2nd side) Weld Volt (V)': 'W361',
-    #                         '(2nd side) Weld Current (A)': 'W362',
-    #                         '(2nd side) Weld Cycle (ms)': 'W363',
-    #                         '(2nd side) Weld Depth (mm)': 'W364',
-    #                         '(2nd side) Weld Energy (J)': 'W365',
-    #                         '(2nd side) Lift (mm)': 'W366',
-    #                         '(2nd side) Ta (ms)': 'W367',
-    #                     },
-    #                 'Brush':
-    #                     {
-    #                         'Data Collection Flag': 'M320',
-    #                         'OK Report Flag': 'M321',
-    #                         'NG Report Flag': 'M322',
-    #                         '2D Code': 'W390',
-    #                         'Jig (brush)': 'W3A0',
-    #                     },
-    #
-    #             },
-    #      },
-    # 'F03':
-    #     {
-    #         'id_line': 32,
-    #         'id_machine': 265,
-    #         'name': 'Seal Tape & Inner Tube',
-    #         'ip': '192.168.1.220',
-    #         'port': 40020,
-    #         'target_network': None,
-    #         'plc_id_in_target_network': None,
-    #         'address':
-    #             {
-    #                 'master_on_address': 'M10',
-    #                 'machine_status_address': 'M1022',
-    #                 'mct_address': 'D7200',
-    #             },
-    #         'production_data':
-    #             {
-    #                 'Tape Pasting':
-    #                     {
-    #                         'Data Collection Flag': 'M300',
-    #                         'OK Report Flag': 'M301',
-    #                         'NG Report Flag': 'M302',
-    #                         '2D Code': 'W654',
-    #                         'Tape Lot': 'W560',
-    #                         'Tape No': 'W568',
-    #
-    #                     },
-    #                 'Img Insp':
-    #                     {
-    #                         'Data Collection Flag': 'M320',
-    #                         'OK Report Flag': 'M321',
-    #                         'NG Report Flag': 'M322',
-    #                         '2D Code': 'W580',
-    #                         'Space Length (mm)': 'W590',
-    #                         'Tape Area (pixel)': 'W591',
-    #                     },
-    #                 'Press Fit':
-    #                     {
-    #                         'Data Collection Flag': 'M340',
-    #                         'OK Report Flag': 'M341',
-    #                         'NG Report Flag': 'M342',
-    #                         '2D Code': 'W5A0',
-    #                         'Orifice Lot': 'W5C0',
-    #                         'Orifice No': 'W5C8',
-    #                         'Inner Tube Lot': 'W5D0',
-    #                         'Inner Tube No': 'W5D8',
-    #                         'Press Height (mm)': 'W5B0',
-    #                     },
-    #             },
-    #     },
-    # 'F04':
-    #     {
-    #         'id_line': 32,
-    #         'id_machine': 266,
-    #         'name': 'GB Propellant filling',
-    #         'ip': '192.168.1.219',
-    #         'port': 40020,
-    #         'target_network': None,
-    #         'plc_id_in_target_network': None,
-    #         'address':
-    #             {
-    #                 'master_on_address': 'M10',
-    #                 'machine_status_address': 'M1022',
-    #                 'mct_address': 'D7200',
-    #             },
-    #         'production_data':
-    #             {
-    #                 'Pre Metering':
-    #                     {
-    #                         'Data Collection Flag': 'M320',
-    #                         'OK Report Flag': 'M321',
-    #                         'NG Report Flag': 'M322',
-    #                         '2D Code': 'W780',
-    #                         '(preFilling) Jig (PreFilling)': 'W794',
-    #                         '(preFilling) PreFill Weight (g)': 'W790',
-    #                         '(preFilling) Jig Weight (g)': 'W792',
-    #                     },
-    #                 'Charge':
-    #                     {
-    #                         'Data Collection Flag': 'M340',
-    #                         'OK Report Flag': 'M341',
-    #                         'NG Report Flag': 'M342',
-    #                         '2D Code': 'W7A0',
-    #                         '(Filling) CID': 'W7B0',
-    #                         '(Filling) Jig (Filling)': 'W7B1',
-    #                         '(Filling) Humidity': 'W7B2',
-    #                         '(Filling) Temperature': 'W7B3',
-    #                         '(Filling) Dewpoint': 'W7B4',
-    #                         'NQ Lot': 'W7B8',
-    #                     },
-    #                 'Tapping':
-    #                     {
-    #                         'Data Collection Flag': 'M360',
-    #                         'OK Report Flag': 'M361',
-    #                         'NG Report Flag': 'M362',
-    #                         '2D Code': 'W7C0',
-    #                         '(Tapping) Height Tap (mm)': 'W7D0',
-    #                         '(Tapping) Jig (Tap)': 'W7D2',
-    #                     },
-    #                 'Post Filling':
-    #                     {
-    #                         'Data Collection Flag': 'M403',
-    #                         'OK Report Flag': 'M410',
-    #                         'NG Report Flag': 'M411',
-    #                         '2D Code': 'W800',
-    #                         '(postFilling) PosFill Weight (g)': 'W810',
-    #                         '(postFilling) Jig Weight (g)': 'W812',
-    #                         '(postFilling) Fill Weight (g)': 'W814',
-    #                         '(postFilling) Weight Setting (g)': 'W816',
-    #                         '(postFilling) Jig (PstFilling)': 'W818',
-    #                     },
-    #                 'Holder1':
-    #                     {
-    #                         'Data Collection Flag': 'M420',
-    #                         'OK Report Flag': 'M421',
-    #                         'NG Report Flag': 'M422',
-    #                         '2D Code': 'W820',
-    #                         '(Holder press 1) Height (mm)': 'W830',
-    #                         '(Holder press 1) Force (kN)': 'W832',
-    #                         '(Holder press 1) Jig (Press)': 'W833',
-    #                         'Holder1 Lot': 'W840',
-    #                         'Holder1 No': 'W848',
-    #                     },
-    #                 'Holder2':
-    #                     {
-    #                         'Data Collection Flag': 'M440',
-    #                         'OK Report Flag': 'M441',
-    #                         'NG Report Flag': 'M442',
-    #                         '2D Code': 'W850',
-    #                         '(Holder press 2) Height (mm)': 'W860',
-    #                         '(Holder press 2) Force (kN)': 'W862',
-    #                         '(Holder press 2) Jig (Press)': 'W863',
-    #                         'Holder2 Lot': 'W870',
-    #                         'Holder2 No': 'W878',
-    #                     },
-    #             },
-    #     },
-    # 'F05':
-    #     {
-    #         'id_line': 32,
-    #         'id_machine': 264,
-    #         'name': 'NQ Propellant Filling',
-    #         'ip': '192.168.1.218',
-    #         'port': 40020,
-    #         'target_network': None,
-    #         'plc_id_in_target_network': None,
-    #         'address':
-    #             {
-    #                 'master_on_address': 'M6',
-    #                 'machine_status_address': 'M44',
-    #                 'mct_address': 'D50080',
-    #             },
-    #         'production_data':
-    #             {
-    #                 'Pre Metering':
-    #                     {
-    #                         'Data Collection Flag': 'M823',
-    #                         'OK Report Flag': 'M301',
-    #                         'NG Report Flag': 'M302',
-    #                         '2D Code': 'W0DA0',
-    #                         '(preFilling) PreFill Weight (g)': 'W0DB0',
-    #                         '(preFilling) Jig Weight (g)': 'W0DB2',
-    #                         '(preFilling) Jig (PreFilling)': 'W0DB4',
-    #                     },
-    #                 'Charge':
-    #                     {
-    #                         'Data Collection Flag': 'M872',
-    #                         'OK Report Flag': 'M321',
-    #                         'NG Report Flag': 'M322',
-    #                         '2D Code': 'W0DC0',
-    #                         '(Filling) CID': 'W0DD0',
-    #                         '(Filling) Jig (Filling)': 'W0DD1',
-    #                         '(Filling) Humidity': 'W0DD2',
-    #                         '(Filling) Temperature': 'W0DD3',
-    #                         '(Filling) Dewpoint': 'W0DD4',
-    #                     },
-    #                 'Tapping':
-    #                     {
-    #                         'Data Collection Flag': 'M340',
-    #                         'OK Report Flag': 'M341',
-    #                         'NG Report Flag': 'M342',
-    #                         '2D Code': 'W0DF0',
-    #                         '(Tapping) Height Tap (mm)': 'W0E00',
-    #                         '(Tapping) Jig (Tap)': 'W0E02',
-    #                     },
-    #                 'Post Filling':
-    #                     {
-    #                         'Data Collection Flag': 'M832',
-    #                         'OK Report Flag': 'M361',
-    #                         'NG Report Flag': 'M362',
-    #                         '2D Code': 'W0E30',
-    #                         '(postFilling) PosFill Weight (g)': 'W0E40',
-    #                         '(postFilling) Jig Weight (g)': 'W0E42',
-    #                         '(postFilling) Fill Weight (g)': 'W0E44',
-    #                         '(postFilling) Weight Setting (g)': 'W0E46',
-    #                         '(postFilling) Jig (PstFilling)': 'W0E4A',
-    #                     },
-    #                 'Prop Top':
-    #                     {
-    #                         'Data Collection Flag': 'M832',
-    #                         'OK Report Flag': 'M381',
-    #                         'NG Report Flag': 'M382',
-    #                         '2D Code': 'W0E50',
-    #                         '(Prop Top) Height (mm)': 'W0E60',
-    #                         '(Prop Top) Jig': 'W0E62'
-    #                     },
-    #                 'Ini Press':
-    #                     {
-    #                         'Data Collection Flag': 'M892',
-    #                         'OK Report Flag': 'M401',
-    #                         'NG Report Flag': 'M402',
-    #                         '2D Code': 'W0E90',
-    #                         '(Initiator) Height (mm)': 'W0EA0',
-    #                         '(Initiator) Jig': 'W0EA2',
-    #                         'Load Force (kN)': 'W0EA4',
-    #                         'Initiator Lot': 'W0EB0',
-    #                         'Initiator No': 'W0EB8',
-    #                         'O-Ring Lot': 'W0EC0',
-    #                         'O-Ring No': 'W0EC8',
-    #                     },
-    #                 'Crimping':
-    #                     {
-    #                         'Data Collection Flag': 'M420',
-    #                         'OK Report Flag': 'M421',
-    #                         'NG Report Flag': 'M422',
-    #                         '2D Code': 'W0EE0',
-    #                         '(Crimping) Height (mm)': 'W0EF0',
-    #                         '(Crimping) Jig': 'W0EF2',
-    #                     },
-    #                 'Ini Measure':
-    #                     {
-    #                         'Data Collection Flag': 'M440',
-    #                         'OK Report Flag': 'M441',
-    #                         'NG Report Flag': 'M442',
-    #                         '2D Code': 'W0F00',
-    #                         'Offset Initiator': 'W0F10'
-    #                     },
-    #             },
-    #     },
-    # 'F06':
-    #     {
-    #         'id_line': 32,
-    #         'id_machine': 236,
-    #         'name': 'Air Leak test',
-    #         'ip': '192.168.1.217',
-    #         'port': 40020,
-    #         'target_network': None,
-    #         'plc_id_in_target_network': None,
-    #         'address':
-    #             {
-    #                 'master_on_address': 'M6',
-    #                 'machine_status_address': 'M44',
-    #                 'mct_address': 'D50080',
-    #             },
-    #         'production_data':
-    #             {
-    #                 'Air Leak1':
-    #                     {
-    #                         'Data Collection Flag': 'M305',
-    #                         'OK Report Flag': 'M301',
-    #                         'NG Report Flag': 'M302',
-    #                         '2D Code': 'W1340',
-    #                         'Pressure Large (kPa)': 'W1350',
-    #                         'Pressure Small (kPa)': 'W1351',
-    #                         'Leak (Pa)': 'W1352',
-    #                         'Leak Cycle (sec)': 'W1353',
-    #                         'Program No': 'W1354',
-    #                     },
-    #                 'Air Leak2':
-    #                     {
-    #                         'Data Collection Flag': 'M325',
-    #                         'OK Report Flag': 'M321',
-    #                         'NG Report Flag': 'M322',
-    #                         '2D Code': 'W1360',
-    #                         'Pressure Large (kPa)': 'W1370',
-    #                         'Pressure Small (kPa)': 'W1371',
-    #                         'Leak (Pa)': 'W1372',
-    #                         'Leak Cycle (sec)': 'W1373',
-    #                         'Program No': 'W1374',
-    #                     },
-    #                 'Air Leak3':
-    #                     {
-    #                         'Data Collection Flag': 'M345',
-    #                         'OK Report Flag': 'M341',
-    #                         'NG Report Flag': 'M342',
-    #                         '2D Code': 'W1380',
-    #                         'Pressure Large (kPa)': 'W1390',
-    #                         'Pressure Small (kPa)': 'W1391',
-    #                         'Leak (Pa)': 'W1392',
-    #                         'Leak Cycle (sec)': 'W1393',
-    #                         'Program No': 'W1394',
-    #                     },
-    #                 'Barcode':
-    #                     {
-    #                         'Data Collection Flag': 'M385',
-    #                         'OK Report Flag': 'M381',
-    #                         'NG Report Flag': 'M382',
-    #                         '2D Code': 'W13D0',
-    #                         'Barcode Lot': 'W13E0',
-    #                         'Barcode No': 'W13E8',
-    #                         'Barcode': 'W13D8',
-    #                     },
-    #             },
-    #     },
-    # 'F07':
-    #     {
-    #         'id_line': 32,
-    #         'id_machine': 267,
-    #         'name': 'COOL',
-    #         'ip': '192.168.1.216',
-    #         'port': 40020,
-    #         'target_network': None,
-    #         'plc_id_in_target_network': None,
-    #         'address':
-    #             {
-    #                 'master_on_address': 'M6',
-    #                 'machine_status_address': 'M44',
-    #                 'mct_address': 'D50080',
-    #             },
-    #         'production_data':
-    #             {
-    #                 'SC Charge':
-    #                     {
-    #                         'Data Collection Flag': 'M305',
-    #                         'OK Report Flag': 'M301',
-    #                         'NG Report Flag': 'M302',
-    #                         'Barcode': 'W1540',
-    #                         'Offset (mm)': 'W1550',
-    #                         'Height (mm)': 'W1551',
-    #                         'S-Clip Lot': 'W1560',
-    #                         'S-Clip No': 'W1568',
-    #                     },
-    #             },
-    #     },
-    # 'F08':
-    #     {
-    #         'id_line': 32,
-    #         'id_machine': 269,
-    #         'name': 'FW & Electrical tester',
-    #         'ip': '192.168.1.215',
-    #         'port': 40020,
-    #         'target_network': None,
-    #         'plc_id_in_target_network': None,
-    #         'address':
-    #             {
-    #                 'master_on_address': 'M100',
-    #                 'machine_status_address': 'M24',
-    #                 'mct_address': 'D7600',
-    #             },
-    #         'production_data':
-    #             {
-    #                 'CL Pasting':
-    #                     {
-    #                         'Data Collection Flag': 'M305',
-    #                         'OK Report Flag': 'M301',
-    #                         'NG Report Flag': 'M302',
-    #                         'Barcode': 'W1770',
-    #                         'Caution Label Lot)': 'W1780',
-    #                         'Caution Label No': 'W1788',
-    #                     },
-    #                 'Weight':
-    #                     {
-    #                         'Data Collection Flag': 'M325',
-    #                         'OK Report Flag': 'M321',
-    #                         'NG Report Flag': 'M322',
-    #                         'Barcode': 'W17C0',
-    #                         'Finel Weigh Weight (g)': 'W17D0',
-    #                     },
-    #                 'ETest1':
-    #                     {
-    #                         'Data Collection Flag': 'M345',
-    #                         'OK Report Flag': 'M341',
-    #                         'NG Report Flag': 'M342',
-    #                         'Barcode': 'W17F0',
-    #                         'Resistance (om)': 'W1800',
-    #                         'Isolation (om)': 'W1801',
-    #                         'Current (mA)': 'W1803',
-    #                         'Cycle (sec)': 'W1804',
-    #                         'Pin resistance (om)': 'W1806',
-    #                         'Pin grounding2 (om)': 'W1807',
-    #                         'S.Clip grounding1 (om)': 'W1805',
-    #                     },
-    #                 'ETest2':
-    #                     {
-    #                         'Data Collection Flag': 'M365',
-    #                         'OK Report Flag': 'M361',
-    #                         'NG Report Flag': 'M362',
-    #                         'Barcode': 'W1820',
-    #                         'Resistance (om)': 'W1830',
-    #                         'Isolation (om)': 'W1831',
-    #                         'Current (mA)': 'W1833',
-    #                         'Cycle (sec)': 'W1834',
-    #                         'Pin resistance (om)': 'W1836',
-    #                         'Pin grounding2 (om)': 'W1837',
-    #                         'S.Clip grounding1 (om)': 'W1835',
-    #                     },
-    #             },
-    #     },
+    'F02':
+        {
+            'id_line': 32,
+            'id_machine': 234,
+            'name': 'Stud Bolt',
+            'ip': '192.168.1.221',
+            'port': 40020,
+            'target_network': None,
+            'plc_id_in_target_network': None,
+            'endpoints': ['Weld', 'Brush'],
+            'endpoints_data_values':
+                {
+                    'Weld':
+                        {
+                            'OK Report Flag':
+                                {
+                                    'address': ['M301'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M302'],
+                                    'type': 'bit',
+                                    'size': 1,
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W340', 'W341', 'W342', 'W343', 'W344', 'W345'],
+                                    'type': 'ascii',
+                                    'size': 6,
+                                },
+                            'Bolt lot':
+                                {
+                                    'address': ['W370', 'W371', 'W372', 'W373', 'W374', 'W375', 'W376', 'W377'],
+                                    'type': 'ascii',
+                                    'size': 8
+                                },
+
+                            'Bolt No':
+                                {
+                                    'address': ['W378', 'W379', 'W37A', 'W37B', 'W37C', 'W37D', 'W37E', 'W37F'],
+                                    'type': 'ascii',
+                                    'size': 8
+                                },
+                            'Jig (weld)':
+                                {
+                                    'address': ['W380'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(1st side) Pilot Volt (V)':
+                                {
+                                    'address': ['W350'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(1st side) Weld Volt (V)':
+                                {
+                                    'address': ['W351'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(1st side) Weld Current (A)':
+                                {
+                                    'address': ['W352'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(1st side) Weld Cycle (ms)':
+                                {
+                                    'address': ['W353'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(1st side) Weld Depth (mm)':
+                                {
+                                    'address': ['W354'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(1st side) Weld Energy (J)':
+                                {
+                                    'address': ['W355'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(1st side) Lift (mm)':
+                                {
+                                    'address': ['W356'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(1st side) Ta (ms)':
+                                {
+                                    'address': ['W357'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(2nd side) Pilot Volt (V)':
+                                {
+                                    'address': ['W360'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(2nd side) Weld Volt (V)':
+                                {
+                                    'address': ['W361'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(2nd side) Weld Current (A)':
+                                {
+                                    'address': ['W362'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(2nd side) Weld Cycle (ms)':
+                                {
+                                    'address': ['W363'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(2nd side) Weld Depth (mm)':
+                                {
+                                    'address': ['W364'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(2nd side) Weld Energy (J)':
+                                {
+                                    'address': ['W365'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(2nd side) Lift (mm)':
+                                {
+                                    'address': ['W366'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            '(2nd side) Ta (ms)':
+                                {
+                                    'address': ['W367'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                            # 'Ng Reason (Id)': 'XXXXX',
+
+                        },
+                    'Brush':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M320'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M321'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M322'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W390', 'W391', 'W392', 'W393', 'W394', 'W395'],
+                                    'type': 'ascii',
+                                    'size': 6,
+                                },
+                            'Jig (brush)':
+                                {
+                                    'address': ['W3A0'],
+                                    'type': 'int',
+                                    'size': 1
+                                },
+                        },
+                },
+            'endpoints_constant_data':
+                {
+                    'Weld':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Brush':
+                        {
+                            'constant_ok_part_data': {'Result': 1, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                },
+            'endpoints_constructors':
+                {
+                    'Weld':
+                        {
+                            'production_data': ['2D Code', 'Program No', 'Output (kW)', 'Runout (mm)', 'Point X',
+                                                'Point Y', 'Point @', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/Marking2D',
+                        },
+                    'Brush':
+                        {
+                            'production_data': ['2D Code', 'Jig (brush)', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/Marking2D',
+                        },
+                },
+         },
+    'F03':
+        {
+            'id_line': 32,
+            'id_machine': 265,
+            'name': 'Seal Tape & Inner Tube',
+            'ip': '192.168.1.220',
+            'port': 40020,
+            'target_network': None,
+            'plc_id_in_target_network': None,
+            'endpoints': ['Tape_Pasting', 'Img_Insp', 'Press_Fit'],
+            'endpoints_data_values':
+                {
+                    'Tape_Pasting':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M300'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M301'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M302'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W654'],
+                                },
+                            'Tape Lot':
+                                {
+                                    'address': ['W560'],
+                                },
+                            'Tape No':
+                                {
+                                    'address': ['W568'],
+                                },
+
+                        },
+                    'Img_Insp':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M320'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M321'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M322'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W580'],
+                                },
+                            'Space Length (mm)':
+                                {
+                                    'address': ['W590'],
+                                },
+                            'Tape Area (pixel)':
+                                {
+                                    'address': ['W591'],
+                                },
+                        },
+                    'Press_Fit':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M340'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M341'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M342'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W5A0'],
+                                },
+                            'Orifice Lot':
+                                {
+                                    'address': ['W5C0'],
+                                },
+                            'Orifice No':
+                                {
+                                    'address': ['W5C8'],
+                                },
+                            'Inner Tube Lot':
+                                {
+                                    'address': ['W5D0'],
+                                },
+                            'Inner Tube No':
+                                {
+                                    'address': ['W5D8'],
+                                },
+                            'Press Height (mm)':
+                                {
+                                    'address': ['W5B0'],
+                                },
+                        },
+                },
+        },
+    'F04':
+        {
+            'id_line': 32,
+            'id_machine': 266,
+            'name': 'GB Propellant filling',
+            'ip': '192.168.1.219',
+            'port': 40020,
+            'target_network': None,
+            'plc_id_in_target_network': None,
+            'endpoints': ['Pre_Metering', 'Charge', 'Tapping', 'Post_Filling', 'Holder1', 'Holder2'],
+            'endpoints_data_values':
+                {
+                    'Pre_Metering':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M320'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M321'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M322'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W780'],
+                                },
+                            '(preFilling) Jig (PreFilling)':
+                                {
+                                    'address': ['W794'],
+                                },
+                            '(preFilling) PreFill Weight (g)':
+                                {
+                                    'address': ['W790'],
+                                },
+                            '(preFilling) Jig Weight (g)':
+                                {
+                                    'address': ['W792'],
+                                },
+                        },
+                    'Charge':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M340'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M341'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M342'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address':['W7A0'],
+                                },
+                            '(Filling) CID':
+                                {
+                                    'address': ['W7B0'],
+                                },
+                            '(Filling) Jig (Filling)':
+                                {
+                                    'address': ['W7B1'],
+                                },
+                            '(Filling) Humidity':
+                                {
+                                    'address': ['W7B2'],
+                                },
+                            '(Filling) Temperature':
+                                {
+                                    'address': ['W7B3'],
+                                },
+                            '(Filling) Dewpoint':
+                                {
+                                    'address': ['W7B4'],
+                                },
+                            'NQ Lot':
+                                {
+                                    'address': ['W7B8'],
+                                },
+                        },
+                    'Tapping':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M360'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M361'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M362'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W7C0'],
+                                },
+                            '(Tapping) Height Tap (mm)':
+                                {
+                                    'address': ['W7D0'],
+                                },
+                            '(Tapping) Jig (Tap)':
+                                {
+                                    'address': ['W7D2'],
+                                },
+                        },
+                    'Post_Filling':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M403'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M410'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M411'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W800'],
+                                },
+                            '(postFilling) PosFill Weight (g)':
+                                {
+                                    'address': ['W810'],
+                                },
+                            '(postFilling) Jig Weight (g)':
+                                {
+                                    'address': ['W812'],
+                                },
+                            '(postFilling) Fill Weight (g)':
+                                {
+                                    'address': ['W814'],
+                                },
+                            '(postFilling) Weight Setting (g)':
+                                {
+                                    'address': ['W816'],
+                                },
+                            '(postFilling) Jig (PstFilling)':
+                                {
+                                    'address': ['W818'],
+                                },
+                        },
+                    'Holder1':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M420'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M421'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M422'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W820'],
+                                },
+                            '(Holder press 1) Height (mm)':
+                                {
+                                    'address': ['W830'],
+                                },
+                            '(Holder press 1) Force (kN)':
+                                {
+                                    'address': ['W832'],
+                                },
+                            '(Holder press 1) Jig (Press)':
+                                {
+                                    'address': ['W833'],
+                                },
+                            'Holder1 Lot':
+                                {
+                                    'address': ['W840'],
+                                },
+                            'Holder1 No':
+                                {
+                                    'address': ['W848'],
+                                },
+                        },
+                    'Holder2':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M440'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M441'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M442'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W850'],
+                                },
+                            '(Holder press 2) Height (mm)':
+                                {
+                                    'address': ['W860'],
+                                },
+                            '(Holder press 2) Force (kN)':
+                                {
+                                    'address': ['W862'],
+                                },
+                            '(Holder press 2) Jig (Press)':
+                                {
+                                    'address': ['W863'],
+                                },
+                            'Holder2 Lot':
+                                {
+                                    'address': ['W870'],
+                                },
+                            'Holder2 No':
+                                {
+                                    'address': ['W878'],
+                                },
+                        },
+                },
+        },
+    'F05':
+        {
+            'id_line': 32,
+            'id_machine': 264,
+            'name': 'NQ Propellant Filling',
+            'ip': '192.168.1.218',
+            'port': 40020,
+            'target_network': None,
+            'plc_id_in_target_network': None,
+            'endpoints': ['Pre_Metering', 'Charge', 'Tapping', 'Post_Filling', 'Prop_Top', 'Ini_Press',
+                          'Crimping', 'Ini_Measure'],
+            'endpoints_data_values':
+                {
+                    'Pre_Metering':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M823'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M301'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M302'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W0DA0'],
+                                },
+                            '(preFilling) PreFill Weight (g)':
+                                {
+                                    'address': ['W0DB0'],
+                                },
+                            '(preFilling) Jig Weight (g)':
+                                {
+                                    'address': ['W0DB2'],
+                                },
+                            '(preFilling) Jig (PreFilling)':
+                                {
+                                    'address': ['W0DB4'],
+                                },
+                        },
+                    'Charge':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M872'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M321'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M322'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W0DC0'],
+                                },
+                            '(Filling) CID':
+                                {
+                                    'address': 'W0DD0',
+                                },
+                            '(Filling) Jig (Filling)':
+                                {
+                                    'address': ['W0DD1'],
+                                },
+                            '(Filling) Humidity':
+                                {
+                                    'address': ['W0DD2'],
+                                },
+                            '(Filling) Temperature':
+                                {
+                                    'address': ['W0DD3'],
+                                },
+                            '(Filling) Dewpoint':
+                                {
+                                    'address': ['W0DD4'],
+                                },
+                        },
+                    'Tapping':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M340'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M341'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M342'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W0DF0'],
+                                },
+                            '(Tapping) Height Tap (mm)':
+                                {
+                                    'address': ['W0E00'],
+                                },
+                            '(Tapping) Jig (Tap)':
+                                {
+                                    'address': ['W0E02'],
+                                },
+                        },
+                    'Post_Filling':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M832'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M361'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M362'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W0E30'],
+                                },
+                            '(postFilling) PosFill Weight (g)':
+                                {
+                                    'address': ['W0E40'],
+                                },
+                            '(postFilling) Jig Weight (g)':
+                                {
+                                    'address': ['W0E42'],
+                                },
+                            '(postFilling) Fill Weight (g)':
+                                {
+                                    'address': ['W0E44'],
+                                },
+                            '(postFilling) Weight Setting (g)':
+                                {
+                                    'address': ['W0E46'],
+                                },
+                            '(postFilling) Jig (PstFilling)':
+                                {
+                                    'address': ['W0E4A'],
+                                },
+                        },
+                    'Prop_Top':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M832'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M381'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M382'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W0E50'],
+                                },
+                            '(Prop Top) Height (mm)':
+                                {
+                                    'address': ['W0E60'],
+                                },
+                            '(Prop Top) Jig':
+                                {
+                                    'address': ['W0E62'],
+                                },
+                        },
+                    'Ini_Press':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M892'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M401'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M402'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W0E90'],
+                                },
+                            '(Initiator) Height (mm)':
+                                {
+                                    'address': ['W0EA0'],
+                                },
+                            '(Initiator) Jig':
+                                {
+                                    'address': ['W0EA2'],
+                                },
+                            'Load Force (kN)':
+                                {
+                                    'address': ['W0EA4'],
+                                },
+                            'Initiator Lot':
+                                {
+                                    'address': ['W0EB0'],
+                                },
+                            'Initiator No':
+                                {
+                                    'address': ['W0EB8'],
+                                },
+                            'O-Ring Lot':
+                                {
+                                    'address': ['W0EC0'],
+                                },
+                            'O-Ring No':
+                                {
+                                    'address': ['W0EC8'],
+                                },
+                        },
+                    'Crimping':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M420'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M421'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M422'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W0EE0'],
+                                },
+                            '(Crimping) Height (mm)':
+                                {
+                                    'address': ['W0EF0'],
+                                },
+                            '(Crimping) Jig':
+                                {
+                                    'address': ['W0EF2'],
+                                },
+                        },
+                    'Ini_Measure':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M440'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M441'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M442'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W0F00'],
+                                },
+                            'Offset Initiator':
+                                {
+                                    'address': ['W0F10'],
+                                },
+                        },
+                },
+        },
+    'F06':
+        {
+            'id_line': 32,
+            'id_machine': 236,
+            'name': 'Air Leak test',
+            'ip': '192.168.1.217',
+            'port': 40020,
+            'target_network': None,
+            'plc_id_in_target_network': None,
+            'endpoints': ['Air_Leak1', 'Air_Leak2', 'Air_Leak3', 'Barcode'],
+            'endpoints_data_values':
+                {
+                    'Air_Leak1':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M305'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M301'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M302'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W1340'],
+                                },
+                            'Pressure Large (kPa)':
+                                {
+                                    'address': ['W1350'],
+                                },
+                            'Pressure Small (kPa)':
+                                {
+                                    'address': ['W1351'],
+                                },
+                            'Leak (Pa)':
+                                {
+                                    'address': ['W1352'],
+                                },
+                            'Leak Cycle (sec)':
+                                {
+                                    'address': ['W1353'],
+                                },
+                            'Program No':
+                                {
+                                    'address': ['W1354'],
+                                },
+                        },
+                    'Air_Leak2':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M325'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M321'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M322'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W1360'],
+                                },
+                            'Pressure Large (kPa)':
+                                {
+                                    'address': ['W1370'],
+                                },
+                            'Pressure Small (kPa)':
+                                {
+                                    'address': ['W1371'],
+                                },
+                            'Leak (Pa)':
+                                {
+                                    'address': ['W1372'],
+                                },
+                            'Leak Cycle (sec)':
+                                {
+                                    'address': ['W1373'],
+                                },
+                            'Program No':
+                                {
+                                    'address': ['W1374'],
+                                },
+                        },
+                    'Air_Leak3':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M345'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M341'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M342'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W1380'],
+                                },
+                            'Pressure Large (kPa)':
+                                {
+                                    'address': ['W1390'],
+                                },
+                            'Pressure Small (kPa)':
+                                {
+                                    'address': ['W1391'],
+                                },
+                            'Leak (Pa)':
+                                {
+                                    'address': ['W1392'],
+                                },
+                            'Leak Cycle (sec)':
+                                {
+                                    'address': ['W1393'],
+                                },
+                            'Program No':
+                                {
+                                    'address': ['W1394'],
+                                },
+                        },
+                    'Barcode':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M385'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M381'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M382'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            '2D Code':
+                                {
+                                    'address': ['W13D0'],
+                                },
+                            'Barcode Lot':
+                                {
+                                    'address': ['W13E0'],
+                                },
+                            'Barcode No':
+                                {
+                                    'address': [ 'W13E8'],
+                                },
+                            'Barcode':
+                                {
+                                    'address': ['W13D8'],
+                                },
+                        },
+                },
+        },
+    'F07':
+        {
+            'id_line': 32,
+            'id_machine': 267,
+            'name': 'COOL',
+            'ip': '192.168.1.216',
+            'port': 40020,
+            'target_network': None,
+            'plc_id_in_target_network': None,
+            'endpoints': ['SC_Charge'],
+            'endpoints_data_values':
+                {
+                    'SC_Charge':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M305'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M301'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M302'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'Barcode':
+                                {
+                                    'address': ['W1540'],
+                                },
+                            'Offset (mm)':
+                                {
+                                    'address': ['W1550'],
+                                },
+                            'Height (mm)':
+                                {
+                                    'address': ['W1551'],
+                                },
+                            'S-Clip Lot':
+                                {
+                                    'address': ['W1560'],
+                                },
+                            'S-Clip No':
+                                {
+                                    'address': ['W1568'],
+                                },
+                        },
+                },
+        },
+    'F08':
+        {
+            'id_line': 32,
+            'id_machine': 269,
+            'name': 'FW & Electrical tester',
+            'ip': '192.168.1.215',
+            'port': 40020,
+            'target_network': None,
+            'plc_id_in_target_network': None,
+            'endpoints': ['CL_Pasting', 'Weight', 'ETest1', 'ETest2', ],
+            'endpoints_data_values':
+                {
+                    'CL_Pasting':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M305'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M301'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M302'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'Barcode':
+                                {
+                                    'address': ['W1770'],
+                                },
+                            'Caution Label Lot)':
+                                {
+                                    'address': ['W1780'],
+                                },
+                            'Caution Label No':
+                                {
+                                    'address': ['W1788'],
+                                },
+                        },
+                    'Weight':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M325'],
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M321'],
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M322'],
+                                },
+                            'Barcode':
+                                {
+                                    'address': ['W17C0'],
+                                },
+                            'Finel Weigh Weight (g)':
+                                {
+                                    'address': ['W17D0'],
+                                },
+                        },
+                    'ETest1':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M345'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M341'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M342'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'Barcode':
+                                {
+                                    'address': ['W17F0'],
+                                },
+                            'Resistance (om)':
+                                {
+                                    'address': ['W1800'],
+                                },
+                            'Isolation (om)':
+                                {
+                                    'address': ['W1801'],
+                                },
+                            'Current (mA)':
+                                {
+                                    'address': ['W1803'],
+                                },
+                            'Cycle (sec)':
+                                {
+                                    'address': ['W1804'],
+                                },
+                            'Pin resistance (om)':
+                                {
+                                    'address': ['W1806'],
+                                },
+                            'Pin grounding2 (om)':
+                                {
+                                    'address': ['W1807'],
+                                },
+                            'S.Clip grounding1 (om)':
+                                {
+                                    'address': ['W1805'],
+                                },
+                        },
+                    'ETest2':
+                        {
+                            'Data Collection Flag':
+                                {
+                                    'address': ['M365'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'OK Report Flag':
+                                {
+                                    'address': ['M361'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'NG Report Flag':
+                                {
+                                    'address': ['M362'],
+                                    'type': 'bit',
+                                    'size': 1
+                                },
+                            'Barcode':
+                                {
+                                    'address': ['W1820'],
+                                },
+                            'Resistance (om)':
+                                {
+                                    'address': ['W1830'],
+                                },
+                            'Isolation (om)':
+                                {
+                                    'address': ['W1831'],
+                                },
+                            'Current (mA)':
+                                {
+                                    'address': ['W1833'],
+                                },
+                            'Cycle (sec)':
+                                {
+                                    'address': ['W1834'],
+                                },
+                            'Pin resistance (om)':
+                                {
+                                    'address': ['W1836'],
+                                },
+                            'Pin grounding2 (om)':
+                                {
+                                    'address': ['W1837'],
+                                },
+                            'S.Clip grounding1 (om)':
+                                {
+                                    'address': ['W1835'],
+                                },
+                        },
+                },
+        },
 }

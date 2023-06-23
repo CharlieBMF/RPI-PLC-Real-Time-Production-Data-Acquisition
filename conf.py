@@ -391,12 +391,6 @@ machines_names = {
                         },
                     'Brush':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M320'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M321'],
@@ -421,6 +415,7 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                 },
             'endpoints_constant_data':
@@ -444,14 +439,14 @@ machines_names = {
                                                 'Point Y', 'Point @', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
-                            'url': 'http://hamster.dsse.local/EN3/PutData/Marking2D',
+                            'url': 'http://hamster.dsse.local/EN3/PutData/StudBolt',
                         },
                     'Brush':
                         {
                             'production_data': ['2D Code', 'Jig (brush)', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
-                            'url': 'http://hamster.dsse.local/EN3/PutData/Marking2D',
+                            'url': 'http://hamster.dsse.local/EN3/PutData/StudBolt',
                         },
                 },
          },
@@ -469,12 +464,6 @@ machines_names = {
                 {
                     'Tape_Pasting':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M300'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M301'],
@@ -489,26 +478,27 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W654'],
+                                    'address': ['W654', 'W655', 'W656', 'W657', 'W658', 'W659'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             'Tape Lot':
                                 {
-                                    'address': ['W560'],
+                                    'address': ['W560', 'W561', 'W562', 'W563', 'W564', 'W565', 'W566', 'W567'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
                             'Tape No':
                                 {
-                                    'address': ['W568'],
+                                    'address': ['W568', 'W569', 'W56A', 'W56B', 'W56C', 'W56D', 'W56E', 'W56F'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
 
                         },
                     'Img_Insp':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M320'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M321'],
@@ -523,25 +513,26 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W580'],
+                                    'address': ['W580', 'W581', 'W582', 'W583', 'W584', 'W585'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             'Space Length (mm)':
                                 {
                                     'address': ['W590'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Tape Area (pixel)':
                                 {
                                     'address': ['W591'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Press_Fit':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M340'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M341'],
@@ -556,28 +547,84 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W5A0'],
+                                    'address': ['W5A0', 'W5A1', 'W5A2', 'W5A3', 'W5A4', 'W5A5'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             'Orifice Lot':
                                 {
-                                    'address': ['W5C0'],
+                                    'address': ['W5C0', 'W5C1', 'W5C2', 'W5C3', 'W5C4', 'W5C5', 'W5C6', 'W5C7'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
                             'Orifice No':
                                 {
-                                    'address': ['W5C8'],
+                                    'address': ['W5C8', 'W5C9', 'W5CA', 'W5CB', 'W5CC', 'W5CD', 'W5CE', 'W5CF'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
                             'Inner Tube Lot':
                                 {
-                                    'address': ['W5D0'],
+                                    'address': ['W5D0', 'W5D1', 'W5D2', 'W5D3', 'W5D4', 'W5D5', 'W5D6', 'W5D7'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
                             'Inner Tube No':
                                 {
-                                    'address': ['W5D8'],
+                                    'address': ['W5D8', 'W5D9', 'W5DA', 'W5DB', 'W5DC', 'W5DD', 'W5DE', 'W5DF'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
                             'Press Height (mm)':
                                 {
                                     'address': ['W5B0'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
+                        },
+                },
+            'endpoints_constant_data':
+                {
+                    'Tape_Pasting':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Img_Insp':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Press_Fit':
+                        {
+                            'constant_ok_part_data': {'Result': 1, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                },
+            'endpoints_constructors':
+                {
+                    'Tape_Pasting':
+                        {
+                            'production_data': ['2D Code', 'Tape Lot', 'Tape No', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/SealTape',
+                        },
+                    'Img_Insp':
+                        {
+                            'production_data': ['2D Code', 'Space Length (mm)',  'Tape Area (pixel)', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/SealTape',
+                        },
+                    'Press_Fit':
+                        {
+                            'production_data': ['2D Code', 'Orifice Lot', 'Orifice No', 'Inner Tube Lot',
+                                                'Inner Tube No', 'Press Height (mm)', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/SealTape',
                         },
                 },
         },
@@ -595,12 +642,6 @@ machines_names = {
                 {
                     'Pre_Metering':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M320'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M321'],
@@ -615,29 +656,32 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W780'],
+                                    'address': ['W780', 'W781', 'W782', 'W783', 'W784', 'W785'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(preFilling) Jig (PreFilling)':
                                 {
                                     'address': ['W794'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             '(preFilling) PreFill Weight (g)':
                                 {
                                     'address': ['W790'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(preFilling) Jig Weight (g)':
                                 {
                                     'address': ['W792'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Charge':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M340'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M341'],
@@ -652,41 +696,50 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address':['W7A0'],
+                                    'address': ['W7A0', 'W7A1', 'W7A2', 'W7A3', 'W7A4', 'W7A5'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(Filling) CID':
                                 {
                                     'address': ['W7B0'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             '(Filling) Jig (Filling)':
                                 {
                                     'address': ['W7B1'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             '(Filling) Humidity':
                                 {
                                     'address': ['W7B2'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             '(Filling) Temperature':
                                 {
                                     'address': ['W7B3'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             '(Filling) Dewpoint':
                                 {
                                     'address': ['W7B4'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'NQ Lot':
                                 {
-                                    'address': ['W7B8'],
+                                    'address': ['W7B8', 'W7B9', 'W7BA', 'W7BB', 'W7BC', 'W7BD', 'W7BE', 'W7BF'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Tapping':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M360'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M361'],
@@ -701,25 +754,26 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W7C0'],
+                                    'address': ['W7C0', 'W7C1', 'W7C2', 'W7C3', 'W7C4', 'W7C5'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(Tapping) Height Tap (mm)':
                                 {
                                     'address': ['W7D0'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(Tapping) Jig (Tap)':
                                 {
                                     'address': ['W7D2'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Post_Filling':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M403'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M410'],
@@ -734,37 +788,44 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W800'],
+                                    'address': ['W800', 'W801', 'W802', 'W803', 'W804', 'W805'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(postFilling) PosFill Weight (g)':
                                 {
                                     'address': ['W810'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(postFilling) Jig Weight (g)':
                                 {
                                     'address': ['W812'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(postFilling) Fill Weight (g)':
                                 {
                                     'address': ['W814'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(postFilling) Weight Setting (g)':
                                 {
                                     'address': ['W816'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(postFilling) Jig (PstFilling)':
                                 {
                                     'address': ['W818'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Holder1':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M420'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M421'],
@@ -779,37 +840,44 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W820'],
+                                    'address': ['W820', 'W821', 'W822', 'W823', 'W824', 'W825'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(Holder press 1) Height (mm)':
                                 {
                                     'address': ['W830'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(Holder press 1) Force (kN)':
                                 {
                                     'address': ['W832'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             '(Holder press 1) Jig (Press)':
                                 {
                                     'address': ['W833'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Holder1 Lot':
                                 {
-                                    'address': ['W840'],
+                                    'address': ['W840', 'W841', 'W842', 'W843', 'W844', 'W845', 'W846', 'W847'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
                             'Holder1 No':
                                 {
-                                    'address': ['W848'],
+                                    'address': ['W848', 'W841', 'W842', 'W843', 'W844', 'W845', 'W846', 'W847'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Holder2':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M440'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M441'],
@@ -824,28 +892,131 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W850'],
+                                    'address': ['W850', 'W851', 'W852', 'W853', 'W854', 'W855'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(Holder press 2) Height (mm)':
                                 {
                                     'address': ['W860'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(Holder press 2) Force (kN)':
                                 {
                                     'address': ['W862'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             '(Holder press 2) Jig (Press)':
                                 {
                                     'address': ['W863'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Holder2 Lot':
                                 {
-                                    'address': ['W870'],
+                                    'address': ['W870', 'W871', 'W872', 'W873', 'W874', 'W875', 'W876', 'W877'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
                             'Holder2 No':
                                 {
-                                    'address': ['W878'],
+                                    'address': ['W878', 'W879', 'W87A', 'W87B', 'W87C', 'W87D', 'W87E', 'W87F'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
+                        },
+                },
+            'endpoints_constant_data':
+                {
+                    'Pre_Metering':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Charge':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Tapping':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Post_Filling':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Holder1':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Holder2':
+                        {
+                            'constant_ok_part_data': {'Result': 1, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                },
+            'endpoints_constructors':
+                {
+                    'Pre_Metering':
+                        {
+                            'production_data': ['2D Code', '(preFilling) Jig (PreFilling)',
+                                                '(preFilling) PreFill Weight (g)', '(preFilling) Jig Weight (g)',
+                                                'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/HolderPress',
+                        },
+                    'Charge':
+                        {
+                            'production_data': ['2D Code', '(Filling) CID', '(Filling) Jig (Filling)',
+                                                '(Filling) Humidity', '(Filling) Temperature', '(Filling) Dewpoint',
+                                                'NQ Lot', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/HolderPress',
+                        },
+                    'Tapping':
+                        {
+                            'production_data': ['2D Code', '(Tapping) Height Tap (mm)', '(Tapping) Jig (Tap)',
+                                                'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/HolderPress',
+                        },
+                    'Post_Filling':
+                        {
+                            'production_data': ['2D Code', '(postFilling) PosFill Weight (g)',
+                                                '(postFilling) Jig Weight (g)', '(postFilling) Fill Weight (g)',
+                                                '(postFilling) Weight Setting (g)', '(postFilling) Jig (PstFilling)',
+                                                'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/HolderPress',
+                        },
+                    'Holder1':
+                        {
+                            'production_data': ['2D Code', '(Holder press 1) Height (mm)',
+                                                '(Holder press 1) Force (kN)', '(Holder press 1) Jig (Press)',
+                                                'Holder1 Lot', 'Holder1 No', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/HolderPress',
+                        },
+                    'Holder2':
+                        {
+                            'production_data': ['2D Code', '(Holder press 2) Height (mm)',
+                                                '(Holder press 2) Force (kN)', '(Holder press 2) Jig (Press)',
+                                                'Holder2 Lot', 'Holder2 No', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/HolderPress',
                         },
                 },
         },
@@ -864,12 +1035,6 @@ machines_names = {
                 {
                     'Pre_Metering':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M823'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M301'],
@@ -884,29 +1049,32 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W0DA0'],
+                                    'address': ['W0DA0', 'W0DA1', 'W0DA2', 'W0DA3', 'W0DA4', 'W0DA5'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(preFilling) PreFill Weight (g)':
                                 {
                                     'address': ['W0DB0'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(preFilling) Jig Weight (g)':
                                 {
                                     'address': ['W0DB2'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(preFilling) Jig (PreFilling)':
                                 {
                                     'address': ['W0DB4'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Charge':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M872'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M321'],
@@ -921,37 +1089,44 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W0DC0'],
+                                    'address': ['W0DC0', 'W0DC1', 'W0DC2', 'W0DC3', 'W0DC4', 'W0DC5'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(Filling) CID':
                                 {
-                                    'address': 'W0DD0',
+                                    'address': ['W0DD0'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             '(Filling) Jig (Filling)':
                                 {
                                     'address': ['W0DD1'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             '(Filling) Humidity':
                                 {
                                     'address': ['W0DD2'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             '(Filling) Temperature':
                                 {
                                     'address': ['W0DD3'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             '(Filling) Dewpoint':
                                 {
                                     'address': ['W0DD4'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Tapping':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M340'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M341'],
@@ -966,25 +1141,26 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W0DF0'],
+                                    'address': ['W0DF0', 'W0DF1', 'W0DF2', 'W0DF3', 'W0DF4', 'W0DF5'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(Tapping) Height Tap (mm)':
                                 {
                                     'address': ['W0E00'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(Tapping) Jig (Tap)':
                                 {
                                     'address': ['W0E02'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Post_Filling':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M832'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M361'],
@@ -999,37 +1175,44 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W0E30'],
+                                    'address': ['W0E30', 'W0E31', 'W0E32', 'W0E33', 'W0E34', 'W0E35'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(postFilling) PosFill Weight (g)':
                                 {
                                     'address': ['W0E40'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(postFilling) Jig Weight (g)':
                                 {
                                     'address': ['W0E42'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(postFilling) Fill Weight (g)':
                                 {
                                     'address': ['W0E44'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(postFilling) Weight Setting (g)':
                                 {
                                     'address': ['W0E46'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(postFilling) Jig (PstFilling)':
                                 {
                                     'address': ['W0E4A'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Prop_Top':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M832'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M381'],
@@ -1044,25 +1227,26 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W0E50'],
+                                    'address': ['W0E50', 'W0E51', 'W0E52', 'W0E53', 'W0E54', 'W0E55'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(Prop Top) Height (mm)':
                                 {
                                     'address': ['W0E60'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(Prop Top) Jig':
                                 {
                                     'address': ['W0E62'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Ini_Press':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M892'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M401'],
@@ -1077,45 +1261,56 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W0E90'],
+                                    'address': ['W0E90', 'W0E91', 'W0E92', 'W0E93', 'W0E94', 'W0E95'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(Initiator) Height (mm)':
                                 {
                                     'address': ['W0EA0'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(Initiator) Jig':
                                 {
                                     'address': ['W0EA2'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Load Force (kN)':
                                 {
                                     'address': ['W0EA4'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Initiator Lot':
                                 {
-                                    'address': ['W0EB0'],
+                                    'address': ['W0EB0', 'W0EB1', 'W0EB2', 'W0EB3', 'W0EB4', 'W0EB5', 'W0EB6', 'W0EB7'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
                             'Initiator No':
                                 {
-                                    'address': ['W0EB8'],
+                                    'address': ['W0EB8', 'W0EB9', 'W0EBA', 'W0EBB', 'W0EBC', 'W0EBD', 'W0EBE', 'W0EBF'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
                             'O-Ring Lot':
                                 {
-                                    'address': ['W0EC0'],
+                                    'address': ['W0EC0', 'W0EC1', 'W0EC2', 'W0EC3', 'W0EC4', 'W0EC5', 'W0EC6', 'W0EC7'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
                             'O-Ring No':
                                 {
-                                    'address': ['W0EC8'],
+                                    'address': ['W0EC8', 'W0EC9', 'W0ECA', 'W0ECB', 'W0ECC', 'W0ECD', 'W0ECE', 'W0ECF'],
+                                    'type': 'ascii',
+                                    'size': 8,
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Crimping':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M420'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M421'],
@@ -1130,25 +1325,26 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W0EE0'],
+                                    'address': ['W0EE0', 'W0EE1', 'W0EE2', 'W0EE3', 'W0EE4', 'W0EE5'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             '(Crimping) Height (mm)':
                                 {
                                     'address': ['W0EF0'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
                             '(Crimping) Jig':
                                 {
                                     'address': ['W0EF2'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Ini_Measure':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M440'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M441'],
@@ -1163,12 +1359,131 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W0F00'],
+                                    'address': ['W0F00', 'W0F01', 'W0F02', 'W0F03', 'W0F04', 'W0F05'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             'Offset Initiator':
                                 {
                                     'address': ['W0F10'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
+                        },
+                },
+            'endpoints_constant_data':
+                {
+                    'Pre_Metering':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Charge':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 2, 'Seriese': 0}
+                        },
+                    'Tapping':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Post_Filling':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Prop_Top':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Ini_Press':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Crimping':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                    'Ini_Measure':
+                        {
+                            'constant_ok_part_data': {'Result': 1, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                },
+            'endpoints_constructors':
+                {
+                    'Pre_Metering':
+                        {
+                            'production_data': ['2D Code', '(preFilling) PreFill Weight (g)',
+                                                '(preFilling) Jig Weight (g)', '(preFilling) Jig (PreFilling)',
+                                                'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
+                        },
+                    'Charge':
+                        {
+                            'production_data': ['2D Code', '(Filling) CID', '(Filling) Jig (Filling)',
+                                                '(Filling) Humidity', '(Filling) Temperature', '(Filling) Dewpoint',
+                                                'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
+                        },
+                    'Tapping':
+                        {
+                            'production_data': ['2D Code', '(Tapping) Height Tap (mm)', '(Tapping) Jig (Tap)',
+                                                'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
+                        },
+                    'Post_Filling':
+                        {
+                            'production_data': ['2D Code', '(postFilling) PosFill Weight (g)',
+                                                '(postFilling) Jig Weight (g)', '(postFilling) Fill Weight (g)',
+                                                '(postFilling) Weight Setting (g)', '(postFilling) Jig (PstFilling)',
+                                                'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
+                        },
+                    'Prop_Top':
+                        {
+                            'production_data': ['2D Code', '(Prop Top) Height (mm)', '(Prop Top) Jig',
+                                                'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
+                        },
+                    'Ini_Press':
+                        {
+                            'production_data': ['2D Code', '(Initiator) Height (mm)', '(Initiator) Jig',
+                                                'Load Force (kN)', 'Initiator Lot', 'Initiator No', 'O-Ring Lot',
+                                                'O-Ring No', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
+                        },
+                    'Crimping':
+                        {
+                            'production_data': ['2D Code', '(Crimping) Height (mm)', '(Crimping) Jig',
+                                                'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
+                        },
+                    'Ini_Measure':
+                        {
+                            'production_data': ['2D Code', 'Offset Initiator', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
                         },
                 },
         },
@@ -1186,12 +1501,6 @@ machines_names = {
                 {
                     'Air_Leak1':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M305'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M301'],
@@ -1206,37 +1515,44 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W1340'],
+                                    'address': ['W1340', 'W1341', 'W1342', 'W1343', 'W1344', 'W1345'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             'Pressure Large (kPa)':
                                 {
                                     'address': ['W1350'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Pressure Small (kPa)':
                                 {
                                     'address': ['W1351'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Leak (Pa)':
                                 {
                                     'address': ['W1352'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Leak Cycle (sec)':
                                 {
                                     'address': ['W1353'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Program No':
                                 {
                                     'address': ['W1354'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Air_Leak2':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M325'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M321'],
@@ -1251,37 +1567,44 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W1360'],
+                                    'address': ['W1360', 'W1361', 'W1362', 'W1363', 'W1364', 'W1365'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             'Pressure Large (kPa)':
                                 {
                                     'address': ['W1370'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Pressure Small (kPa)':
                                 {
                                     'address': ['W1371'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Leak (Pa)':
                                 {
                                     'address': ['W1372'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Leak Cycle (sec)':
                                 {
                                     'address': ['W1373'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Program No':
                                 {
                                     'address': ['W1374'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Air_Leak3':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M345'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M341'],
@@ -1296,37 +1619,44 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W1380'],
+                                    'address': ['W1380', 'W1381', 'W1382', 'W1383', 'W1384', 'W1385'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             'Pressure Large (kPa)':
                                 {
                                     'address': ['W1390'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Pressure Small (kPa)':
                                 {
                                     'address': ['W1391'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Leak (Pa)':
                                 {
                                     'address': ['W1392'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Leak Cycle (sec)':
                                 {
                                     'address': ['W1393'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Program No':
                                 {
                                     'address': ['W1394'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Barcode':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M385'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M381'],
@@ -1341,20 +1671,86 @@ machines_names = {
                                 },
                             '2D Code':
                                 {
-                                    'address': ['W13D0'],
+                                    'address': ['W13D0', 'W13D1', 'W13D2', 'W13D3', 'W13D4', 'W13D5'],
+                                    'type': 'ascii',
+                                    'size': 6,
                                 },
                             'Barcode Lot':
                                 {
-                                    'address': ['W13E0'],
+                                    'address': ['W13E0', 'W13E1', 'W13E2', 'W13E3', 'W13E4', 'W13E5', 'W13E6', 'W13E7'],
+                                    'type': 'ascii',
+                                    'size': 8
                                 },
                             'Barcode No':
                                 {
-                                    'address': [ 'W13E8'],
+                                    'address': ['W13E8', 'W13E9', 'W13EA', 'W13EB', 'W13EC', 'W13ED', 'W13EE', 'W13EF'],
+                                    'type': 'ascii',
+                                    'size': 8
                                 },
                             'Barcode':
                                 {
-                                    'address': ['W13D8'],
+                                    'address': ['W13D8', 'W13D9', 'W13DA', 'W13DB', 'W13DC', 'W13DD'],
+                                    'type': 'ascii',
+                                    'size': 6
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
+                        },
+                },
+            'endpoints_constant_data':
+                {
+                    'Air_Leak1':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 1},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 1}
+                        },
+                    'Air_Leak2':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 2},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 2}
+                        },
+                    'Air_Leak3':
+                        {
+                            'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 3},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 3}
+                        },
+                    'Barcode':
+                        {
+                            'constant_ok_part_data': {'Result': 1, 'NG Count': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1}
+                        },
+                },
+            'endpoints_constructors':
+                {
+                    'Air_Leak1':
+                        {
+                            'production_data': ['2D Code', 'Pressure Large (kPa)', 'Pressure Small (kPa)', 'Leak (Pa)',
+                                                'Leak Cycle (sec)', 'Program No', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/AirLeak',
+                        },
+                    'Air_Leak2':
+                        {
+                            'production_data': ['2D Code', 'Pressure Large (kPa)', 'Pressure Small (kPa)', 'Leak (Pa)',
+                                                'Leak Cycle (sec)', 'Program No', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/AirLeak',
+                        },
+                    'Air_Leak3':
+                        {
+                            'production_data': ['2D Code', 'Pressure Large (kPa)', 'Pressure Small (kPa)', 'Leak (Pa)',
+                                                'Leak Cycle (sec)', 'Program No', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/AirLeak',
+                        },
+                    'Barcode':
+                        {
+                            'production_data': ['2D Code', 'Barcode Lot', 'Barcode No', 'Barcode', 'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/AirLeak',
                         },
                 },
         },
@@ -1372,12 +1768,6 @@ machines_names = {
                 {
                     'SC_Charge':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M305'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M301'],
@@ -1392,24 +1782,54 @@ machines_names = {
                                 },
                             'Barcode':
                                 {
-                                    'address': ['W1540'],
+                                    'address': ['W1540', 'W1541', 'W1542', 'W1543', 'W1544', 'W1545'],
+                                    'type': 'ascii',
+                                    'size': 6
                                 },
                             'Offset (mm)':
                                 {
                                     'address': ['W1550'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Height (mm)':
                                 {
                                     'address': ['W1551'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'S-Clip Lot':
                                 {
-                                    'address': ['W1560'],
+                                    'address': ['W1560', 'W1561', 'W1562', 'W1563', 'W1564', 'W1565', 'W1566', 'W1567'],
+                                    'type': 'ascii',
+                                    'size': 8
                                 },
                             'S-Clip No':
                                 {
-                                    'address': ['W1568'],
+                                    'address': ['W1568', 'W1569', 'W156A', 'W156B', 'W156C', 'W156D', 'W156E', 'W156F'],
+                                    'type': 'ascii',
+                                    'size': 8
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
+                        },
+                },
+            'endpoints_constant_data':
+                {
+                    'SC_Charge':
+                        {
+                            'constant_ok_part_data': {'Result': 1, 'NG Count': 0, 'Seriese': 0},
+                            'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                        },
+                },
+            'endpoints_constructors':
+                {
+                    'SC_Charge':
+                        {
+                            'production_data': ['Barcode', 'Offset (mm)', 'Height (mm)', 'S-Clip Lot', 'S-Clip No',
+                                                'Ng Reason (Id)'],
+                            'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                            'url': 'http://hamster.dsse.local/EN3/PutData/ShortingClip',
                         },
                 },
         },
@@ -1422,17 +1842,11 @@ machines_names = {
             'port': 40020,
             'target_network': None,
             'plc_id_in_target_network': None,
-            'endpoints': ['CL_Pasting', 'Weight', 'ETest1', 'ETest2', ],
+            'endpoints': ['CL_Pasting', 'Weight', 'ETest1', 'ETest2'],
             'endpoints_data_values':
                 {
                     'CL_Pasting':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M305'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M301'],
@@ -1447,48 +1861,54 @@ machines_names = {
                                 },
                             'Barcode':
                                 {
-                                    'address': ['W1770'],
+                                    'address': ['W1770', 'W1771', 'W1772', 'W1773', 'W1774', 'W1775'],
+                                    'type': 'ascii',
+                                    'size': 6
                                 },
-                            'Caution Label Lot)':
+                            'Caution Label Lot':
                                 {
-                                    'address': ['W1780'],
+                                    'address': ['W1780', 'W1781', 'W1782', 'W1783', 'W1784', 'W1785', 'W1786', 'W1787'],
+                                    'type': 'ascii',
+                                    'size': 8
                                 },
                             'Caution Label No':
                                 {
-                                    'address': ['W1788'],
+                                    'address': ['W1788', 'W1789', 'W178A', 'W178B', 'W178C', 'W178D', 'W178E', 'W178F'],
+                                    'type': 'ascii',
+                                    'size': 8
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Weight':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M325'],
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M321'],
+                                    'type': 'bit',
+                                    'size': 1
                                 },
                             'NG Report Flag':
                                 {
                                     'address': ['M322'],
+                                    'type': 'bit',
+                                    'size': 1
                                 },
                             'Barcode':
                                 {
-                                    'address': ['W17C0'],
+                                    'address': ['W17C0', 'W17C1', 'W17C2', 'W17C3', 'W17C4', 'W17C5'],
+                                    'type': 'ascii',
+                                    'size': 6
                                 },
                             'Finel Weigh Weight (g)':
                                 {
                                     'address': ['W17D0'],
+                                    'type': 'int',
+                                    'size': 2
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'ETest1':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M345'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M341'],
@@ -1503,45 +1923,56 @@ machines_names = {
                                 },
                             'Barcode':
                                 {
-                                    'address': ['W17F0'],
+                                    'address': ['W17F0', 'W17F1', 'W17F2', 'W17F3', 'W17F4', 'W17F5'],
+                                    'type': 'ascii',
+                                    'size': 6
                                 },
                             'Resistance (om)':
                                 {
                                     'address': ['W1800'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Isolation (om)':
                                 {
                                     'address': ['W1801'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Current (mA)':
                                 {
                                     'address': ['W1803'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Cycle (sec)':
                                 {
                                     'address': ['W1804'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Pin resistance (om)':
                                 {
                                     'address': ['W1806'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Pin grounding2 (om)':
                                 {
                                     'address': ['W1807'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'S.Clip grounding1 (om)':
                                 {
                                     'address': ['W1805'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'ETest2':
                         {
-                            'Data Collection Flag':
-                                {
-                                    'address': ['M365'],
-                                    'type': 'bit',
-                                    'size': 1
-                                },
                             'OK Report Flag':
                                 {
                                     'address': ['M361'],
@@ -1556,37 +1987,112 @@ machines_names = {
                                 },
                             'Barcode':
                                 {
-                                    'address': ['W1820'],
+                                    'address': ['W1820', 'W1821', 'W1822', 'W1823', 'W1824', 'W1825'],
+                                    'type': 'ascii',
+                                    'size': 6
                                 },
                             'Resistance (om)':
                                 {
                                     'address': ['W1830'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Isolation (om)':
                                 {
                                     'address': ['W1831'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Current (mA)':
                                 {
                                     'address': ['W1833'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Cycle (sec)':
                                 {
                                     'address': ['W1834'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Pin resistance (om)':
                                 {
                                     'address': ['W1836'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'Pin grounding2 (om)':
                                 {
                                     'address': ['W1837'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
                             'S.Clip grounding1 (om)':
                                 {
                                     'address': ['W1835'],
+                                    'type': 'int',
+                                    'size': 1
                                 },
+                            # 'Ng Reason (Id)': 'XXXXX',
                         },
+                },
+        },
+    'endpoints_constant_data':
+        {
+            'CL_Pasting':
+                {
+                    'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                    'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                },
+            'Weight':
+                {
+                    'constant_ok_part_data': {'Result': 0, 'NG Count': 0, 'Seriese': 0},
+                    'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 0}
+                },
+            'ETest1':
+                {
+                    'constant_ok_part_data': {'Result': 1, 'NG Count': 0, 'Seriese': 1},
+                    'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 1}
+                },
+            'ETest2':
+                {
+                    'constant_ok_part_data': {'Result': 1, 'NG Count': 0, 'Seriese': 2},
+                    'constant_ng_part_data': {'Result': -1, 'NG Count': 1, 'Seriese': 2}
+                },
+        },
+    'endpoints_constructors':
+        {
+            'CL_Pasting':
+                {
+                    'production_data': ['Barcode', 'Caution Label Lot', 'Caution Label No', 'Ng Reason (Id)'],
+                    'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                    'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                    'url': 'http://hamster.dsse.local/EN3/PutData/FinalWeight',
+                },
+            'Weight':
+                {
+                    'production_data': ['2D Code', 'Finel Weigh Weight (g)', 'Ng Reason (Id)'],
+                    'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                    'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                    'url': 'http://hamster.dsse.local/EN3/PutData/FinalWeight',
+                },
+            'ETest1':
+                {
+                    'production_data': ['Barcode', 'Resistance (om)', 'Isolation (om)', 'Current (mA)', 'Cycle (sec)',
+                                        'Pin resistance (om)', 'Pin grounding2 (om)', 'S.Clip grounding1 (om)',
+                                        'Ng Reason (Id)'],
+                    'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                    'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                    'url': 'http://hamster.dsse.local/EN3/PutData/FinalWeight',
+                },
+            'ETest2':
+                {
+                    'production_data': ['Barcode', 'Resistance (om)', 'Isolation (om)', 'Current (mA)', 'Cycle (sec)',
+                                        'Pin resistance (om)', 'Pin grounding2 (om)', 'S.Clip grounding1 (om)',
+                                        'Ng Reason (Id)'],
+                    'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                    'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                    'url': 'http://hamster.dsse.local/EN3/PutData/FinalWeight',
                 },
         },
 }

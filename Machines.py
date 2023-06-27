@@ -17,7 +17,8 @@ def time_wrapper(func):
 class Machine:
 
     def __init__(self, id_line, id_machine, name, ip, port, endpoints, endpoints_data_values, endpoints_constant_data,
-                 endpoints_constructors, target_network=None, plc_id_in_target_network=None):
+                 data_collection_signals_head, endpoints_constructors, target_network=None,
+                 plc_id_in_target_network=None):
         self.id_line = id_line
         self.id_machine = id_machine
         self.name = name
@@ -30,6 +31,7 @@ class Machine:
         self.endpoints_data_values = endpoints_data_values
         self.endpoints_constant_data = endpoints_constant_data
         self.endpoints_constructors = endpoints_constructors
+        self.data_collection_signals_head = data_collection_signals_head
 
     def define_machine_root(self):
         pymc3e = pymcprotocol.Type3E()
@@ -53,8 +55,8 @@ class Machine:
     def read_random_words(self, word_devices=[], double_word_devices=[]):
         return self.machine.randomread(word_devices=word_devices, dword_devices=double_word_devices)
 
-    def write_word(self, head, value):
-        self.machine.batchwrite_wordunits(headdevice=head, values=value)
+    def write_word(self, head, values):
+        self.machine.batchwrite_wordunits(headdevice=head, values=values)
 
     def check_data_collection_status(self):
         plc_addresses_words = [self.endpoints_data_values[endpoint][data]['address']
@@ -103,8 +105,8 @@ class Machine:
             if address.endswith('OK Report Flag') or address.endswith('NG Report Flag'):
                 trigger_status = value
                 #print(trigger_status, type(trigger_status))
-                #if trigger_status > 0:
-                if True:
+                if trigger_status > 0:
+                #if True:
                     endpoint_name = address.split('|')[0]
                     address_values_for_endpoint = [element for element in address_values_zip
                                                    if element[0].startswith(endpoint_name)]
@@ -114,42 +116,46 @@ class Machine:
                             address_values_dict[k] = [v]
                         else:
                             address_values_dict[k] = address_values_dict[k] + [v]
-                data_values = {}
+                    data_values = {}
 
-                ## Construct data from plc as dict key:value final to json
-                for k, v in address_values_dict.items():
-                    if len(v) > 1:
-                        #print(v)
-                        binary = [bin(b).replace('0b', '').zfill(16) for b in v]
-                        halves_list = [half for word in binary for half in (word[len(word)//2:], word[:len(word) // 2])]
-                        ascii_string = ''.join([chr(int(binary, 2)) for binary in halves_list])
-                        #print(k, ascii_string)
-                        data_values[k.split('|')[1]] = ascii_string.replace(' ', '').replace("\x00", '')
-                    else:
-                        data_values[k.split('|')[1]] = v[0]
-                print('data values', data_values)
-                json = {}
+                    ## Construct data from plc as dict key:value final to json
+                    for k, v in address_values_dict.items():
+                        if len(v) > 1:
+                            #print(v)
+                            binary = [bin(b).replace('0b', '').zfill(16) for b in v]
+                            halves_list = [half for word in binary for half in (word[len(word)//2:], word[:len(word) // 2])]
+                            ascii_string = ''.join([chr(int(binary, 2)) for binary in halves_list])
+                            #print(k, ascii_string)
+                            data_values[k.split('|')[1]] = ascii_string.replace(' ', '').replace("\x00", '')
+                        else:
+                            data_values[k.split('|')[1]] = v[0]
+                    print('data values', data_values)
+                    json = {}
 
-                data_values['OK Report Flag'] = 1
+                    #data_values['OK Report Flag'] = 1
 
-                ## Construct final JSON
-                for production_data, v in data_values.items():
-                    if production_data in self.endpoints_constructors[endpoint_name]['production_data']:
-                        json[production_data] = v
-                if data_values['OK Report Flag'] == 1:
-                    for constant_data in self.endpoints_constructors[endpoint_name]['constant_ok_part_data']:
-                        json[constant_data] = self.endpoints_constant_data[endpoint_name]['constant_ok_part_data'][constant_data]
-                if data_values['NG Report Flag'] == 1:
-                    for constant_data in self.endpoints_constructors[endpoint_name]['constant_ng_part_data']:
-                        json[constant_data] = self.endpoints_constant_data[endpoint_name]['constant_ng_part_data'][constant_data]
-                print(['JSON'], k, json)
+                    ## Construct final JSON
+                    for production_data, v in data_values.items():
+                        if production_data in self.endpoints_constructors[endpoint_name]['production_data']:
+                            json[production_data] = v
+                    if data_values['OK Report Flag'] == 1:
+                        for constant_data in self.endpoints_constructors[endpoint_name]['constant_ok_part_data']:
+                            json[constant_data] = self.endpoints_constant_data[endpoint_name]['constant_ok_part_data'][constant_data]
+                    if data_values['NG Report Flag'] == 1:
+                        for constant_data in self.endpoints_constructors[endpoint_name]['constant_ng_part_data']:
+                            json[constant_data] = self.endpoints_constant_data[endpoint_name]['constant_ng_part_data'][constant_data]
+                    print(['JSON'], k, json)
 
-                ## Report final JSON
-                u = self.endpoints_constructors[endpoint_name]['url']
-                print(u)
-                print(json)
-                response = requests.post(u, json=json)
-                print('Response text:', response.text)
+                    ## Report final JSON
+                    u = self.endpoints_constructors[endpoint_name]['url']
+                    print(u)
+                    print(json)
+                    response = requests.post(u, json=json)
+                    print('Response text:', response.text)
+
+                    self.connect()
+                    self.write_word(self.data_collection_signals_head[k.split('|')[0]], [0, 0])
+                    self.close_connection()
 
     def connection_data_display(self):
         print(

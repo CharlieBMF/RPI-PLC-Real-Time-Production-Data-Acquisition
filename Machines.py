@@ -32,6 +32,17 @@ class Machine:
         self.endpoints_constant_data = endpoints_constant_data
         self.endpoints_constructors = endpoints_constructors
         self.data_collection_signals_head = data_collection_signals_head
+        self.plc_addresses_words = [self.endpoints_data_values[endpoint][data]['address']
+                                    for endpoint in self.endpoints
+                                    for data in self.endpoints_data_values[endpoint]
+                                    if self.endpoints_data_values[endpoint][data]['size'] != 2]
+        self.plc_addresses_dwords = [self.endpoints_data_values[endpoint][data]['address']
+                                     for endpoint in self.endpoints
+                                     for data in self.endpoints_data_values[endpoint]
+                                     if self.endpoints_data_values[endpoint][data]['size'] == 2]
+        self.plc_words_address_list = self.cumulate_words_addresses_into_list()
+        self.plc_dwords_address_list = self.cumulate_dwords_addresses_into_list()
+        self.words_keys, self.dwords_keys = self.generate_list_of_keys_for_address_lists()
 
     def define_machine_root(self):
         pymc3e = pymcprotocol.Type3E()
@@ -58,48 +69,116 @@ class Machine:
     def write_word(self, head, values):
         self.machine.batchwrite_wordunits(headdevice=head, values=values)
 
-    def check_data_collection_status(self):
-        plc_addresses_words = [self.endpoints_data_values[endpoint][data]['address']
-                               for endpoint in self.endpoints
-                               for data in self.endpoints_data_values[endpoint]
-                               if self.endpoints_data_values[endpoint][data]['size'] != 2]
-        plc_addresses_dwords = [self.endpoints_data_values[endpoint][data]['address']
-                                for endpoint in self.endpoints
-                                for data in self.endpoints_data_values[endpoint]
-                                if self.endpoints_data_values[endpoint][data]['size'] == 2]
+    def cumulate_words_addresses_into_list(self):
+        words_address_list = []
+        for address in self.plc_addresses_words:
+            words_address_list.extend(address)
+        return words_address_list
 
-        plc_addresses_splitted_words, plc_addresses_splitted_dwords = [], []
+    def cumulate_dwords_addresses_into_list(self):
+        dwords_address_list = []
+        for address in self.plc_addresses_dwords:
+            dwords_address_list.extend(address)
+        return dwords_address_list
 
-        for address in plc_addresses_words:
-            plc_addresses_splitted_words.extend(address)
-        for address in plc_addresses_dwords:
-            plc_addresses_splitted_dwords.extend(address)
-
-        #print('[REQUEST] words addresses to read :', plc_addresses_splitted_words)
-        #print('[REQUEST] dwords addresses to read :', plc_addresses_splitted_dwords)
-
-        answer_keys_words, answer_keys_dwords = [], []
+    def generate_list_of_keys_for_address_lists(self):
+        keys_words, keys_dwords = [], []
         for endpoint in self.endpoints:
             for data in self.endpoints_data_values[endpoint]:
                 if self.endpoints_data_values[endpoint][data]['size'] != 2:
-                    answer_keys_words.extend([endpoint + '|' + data]*self.endpoints_data_values[endpoint][data]['size'])
+                    keys_words.extend([endpoint + '|' + data]*self.endpoints_data_values[endpoint][data]['size'])
                 else:
-                    answer_keys_dwords.extend([endpoint + '|' + data])
+                    keys_dwords.extend([endpoint + '|' + data])
+        return keys_words, keys_dwords
 
-        #print('[ANSWER] words addresses to read  :', answer_keys_words)
-        #print('[ANSWER] dwords addresses to read  :', answer_keys_dwords)
-
+    def read_data_from_plc(self):
         self.connect()
         answer_values_words, answer_values_dwords = \
-            self.read_random_words(word_devices=plc_addresses_splitted_words,
-                                   double_word_devices=plc_addresses_splitted_dwords)
-        #self.write_word('D401', [0])
+            self.read_random_words(word_devices=self.plc_words_address_list,
+                                   double_word_devices=self.plc_dwords_address_list)
+        self.close_connection()
+        return answer_values_words, answer_values_dwords
+
+    def connect_keys_with_answer_values(self, answer_values_words, answer_values_dwords):
+        address_values_zip = list(zip(self.words_keys, answer_values_words)) +\
+                             list(zip(self.dwords_keys, answer_values_dwords))
+        return address_values_zip
+
+    @staticmethod
+    def check_report_flags(value):
+        trigger_status = value
+        if trigger_status > 0:
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def create_keys_and_answers_dict(endpoint_name, keys_and_plc_values):
+        address_values_for_endpoint = [element for element in keys_and_plc_values
+                                       if element[0].startswith(endpoint_name)]
+        address_values_dict = {}
+        for (k, v) in address_values_for_endpoint:
+            if k not in address_values_dict.keys():
+                address_values_dict[k] = [v]
+            else:
+                address_values_dict[k] = address_values_dict[k] + [v]
+        return address_values_dict
+
+    def construct_json_from_plc_data(self, keys_answer_dict):
+        data_values = {}
+        for k, v in keys_answer_dict.items():
+            if len(v) > 1:
+                ascii_string = self.convert_decimal_from_plc_into_ascii_string(v)
+                data_values[k.split('|')[1]] = ascii_string.replace(' ', '').replace("\x00", '')
+            else:
+                data_values[k.split('|')[1]] = v[0]
+        return data_values
+
+    @staticmethod
+    def convert_decimal_from_plc_into_ascii_string(decimal_list):
+        binary = [bin(b).replace('0b', '').zfill(16) for b in decimal_list]
+        halves_list = [half for word in binary for half in (word[len(word) // 2:], word[:len(word) // 2])]
+        ascii_string = ''.join([chr(int(binary, 2)) for binary in halves_list])
+        return ascii_string
+
+    def construct_final_json(self, endpoint_name, production_data_dict):
+        final_json = {}
+        for production_data, v in production_data_dict.items():
+            if production_data in self.endpoints_constructors[endpoint_name]['production_data']:
+                final_json[production_data] = v
+        if production_data_dict['OK Report Flag'] == 1:
+            for constant_data in self.endpoints_constructors[endpoint_name]['constant_ok_part_data']:
+                final_json[constant_data] = self.endpoints_constant_data[endpoint_name]['constant_ok_part_data'][
+                    constant_data]
+        if production_data_dict['NG Report Flag'] == 1:
+            for constant_data in self.endpoints_constructors[endpoint_name]['constant_ng_part_data']:
+                final_json[constant_data] = self.endpoints_constant_data[endpoint_name]['constant_ng_part_data'][
+                    constant_data]
+        return final_json
+
+    def report_data_to_api(self, endpoint_name, final_json):
+        url = self.endpoints_constructors[endpoint_name]['url']
+        print(url)
+        print(final_json)
+        response = requests.post(url, json=final_json)
+        print('Response text:', response.text)
+
+    def report_collection_data_completion_in_plc(self, endpointname):
+        self.connect()
+        self.write_word(self.data_collection_signals_head[endpointname], [0, 0])
+        self.close_connection()
+
+    def check_data_collection_status(self):
+        self.connect()
+        answer_values_words, answer_values_dwords = \
+            self.read_random_words(word_devices=self.plc_words_address_list,
+                                   double_word_devices=self.plc_dwords_address_list)
         self.close_connection()
 
         #print('[ANSWER] words values  :', answer_values_words)
         #print('[ANSWER] dwords values:', answer_values_dwords)
-        address_values_zip = list(zip(answer_keys_words, answer_values_words)) +\
-                             list(zip(answer_keys_dwords, answer_values_dwords))
+        address_values_zip = list(zip(self.words_keys, answer_values_words)) +\
+                             list(zip(self.dwords_keys, answer_values_dwords))
 
         for address, value in address_values_zip:
             if address.endswith('OK Report Flag') or address.endswith('NG Report Flag'):
@@ -129,7 +208,6 @@ class Machine:
                             data_values[k.split('|')[1]] = ascii_string.replace(' ', '').replace("\x00", '')
                         else:
                             data_values[k.split('|')[1]] = v[0]
-                    print('data values', data_values)
                     json = {}
 
                     #data_values['OK Report Flag'] = 1

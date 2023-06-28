@@ -11,6 +11,7 @@ def create_machine_classes():
                     endpoints_data_values=v['endpoints_data_values'],
                     endpoints_constant_data=v['endpoints_constant_data'],
                     endpoints_constructors=v['endpoints_constructors'],
+                    data_collection_signals_head=v['data_collection_signals_head'],
                     )
         list_of_machines.append(k)
     return list_of_machines
@@ -18,14 +19,28 @@ def create_machine_classes():
 
 list_of_machine_classes = create_machine_classes()
 
-starto = time.time()
-for i in range(0, 150):
 
+#for i in range(0, 1500):
+while True:
+    starto = time.time()
     for machine_class in list_of_machine_classes:
-        machine_class.check_data_collection_status()
+       # machine_class.check_data_collection_status()
+        plc_words_values, plc_dwords_values = machine_class.read_data_from_plc()
+        keys_and_plc_values = machine_class.connect_keys_with_answer_values(plc_words_values, plc_dwords_values)
+        for address, value in keys_and_plc_values:
+            if address.endswith('OK Report Flag') or address.endswith('NG Report Flag'):
+                if machine_class.check_report_flags(value):
+                    endpoint_name = address.split('|')[0]
+                    keys_answer_dict = machine_class.create_keys_and_answers_dict(endpoint_name, keys_and_plc_values)
+                    print(keys_answer_dict)
+                    production_data_dict = machine_class.construct_json_from_plc_data(keys_answer_dict)
+                    print(production_data_dict)
+                    final_json = machine_class.construct_final_json(endpoint_name, production_data_dict)
+                    machine_class.report_data_to_api(endpoint_name, final_json)
+                    machine_class.report_collection_data_completion_in_plc(endpoint_name)
 
-endo = time.time()
-print(f'Full scan time: {endo-starto}')
+    endo = time.time()
+    print(f'Full line loop time: {endo-starto}')
 
 
 ##################################### ASYNCIO

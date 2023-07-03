@@ -49,7 +49,7 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            # 'Ng Reason (Id)': 'XXXXX',
+                            'Ng Reason (Id)': 'XXXXX',
 
                         },
                     'Press_Fit':
@@ -96,7 +96,7 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                  },
-                            # 'Ng Reason (Id)': 'XXXXX',
+                            'Ng Reason (Id)': 'XXXXX',
 
                         },
                     'Weld':

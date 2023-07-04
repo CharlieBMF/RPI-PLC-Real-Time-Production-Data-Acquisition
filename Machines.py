@@ -154,6 +154,8 @@ class Machine:
             for constant_data in self.endpoints_constructors[endpoint_name]['constant_ng_part_data']:
                 final_json[constant_data] = self.endpoints_constant_data[endpoint_name]['constant_ng_part_data'][
                     constant_data]
+                ### TUTAJ DOPISAC ZE BRAC TEZ DANE Z NG REASON (ID) Z PRODUCTION DATA #if NG REASON ID IN PRODUCTION DATA
+                ### TUTAJ DOPISAC ZE ZEROWAC ID REASON Z (ID) Z PRODUCTION DATA TEN ADRES W PLC
         return final_json
 
     def report_data_to_api(self, endpoint_name, final_json):

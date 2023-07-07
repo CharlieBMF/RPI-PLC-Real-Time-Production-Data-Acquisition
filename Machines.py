@@ -1,9 +1,20 @@
+
+"""
+Real Time Data collection from production line. Contains all the methods necessary to collect data.
+"""
+
 import pymcprotocol
 import time
 import requests
 
 
 def time_wrapper(func):
+    """
+    Wrapper for showing function name and execution time.
+    For debugging & controll
+    :param func: any function
+    :return: wrapped function
+    """
     def wrap(*args, **kwargs):
         start = time.time()
         result = func(*args, **kwargs)
@@ -15,10 +26,32 @@ def time_wrapper(func):
 
 
 class Machine:
+    """Class representing one Machine on the line"""
 
     def __init__(self, id_line, id_machine, name, ip, port, endpoints, endpoints_data_values, endpoints_constant_data,
                  data_collection_signals_head, endpoints_constructors, target_network=None,
                  plc_id_in_target_network=None):
+        """
+        Init for class
+        :param id_line: id of a production line
+        :param id_machine: id of a machine
+        :param name: name of the machine
+        :param ip: IP address to connect to machine
+        :param port: open port for communication between the RaspberryPi and the machine
+        :param endpoints: list of a reporting endpoint on machine
+        :param endpoints_data_values: dict of names & specification of production data for each endpoint
+        :param endpoints_constant_data: constant data which should be added during reporting to API for each endpoint
+        depends on the OK or NG status. Include Result, Seriese, NG Count
+        :param data_collection_signals_head: head of addresses in PLC which is controlled also by the script during
+        exchanging data. Contains address for OK, NG and NG id. These addresses are reset by script after proper data
+        collection
+        :param endpoints_constructors: constructor which contains dictionary of data which should be included during
+        construction of json to API
+        :param target_network:it is possible to communicate using other communication protocols to other machines
+         on the line. If the RPI to PLC, it is possible to perform routing on the PLC for a different network number
+          and communicate with another PLC. This number determines to which network number routing should be performed
+        :param plc_id_in_target_network: id of the PLC on routed network
+        """
         self.id_line = id_line
         self.id_machine = id_machine
         self.name = name
@@ -45,6 +78,10 @@ class Machine:
         self.words_keys, self.dwords_keys = self.generate_list_of_keys_for_address_lists()
 
     def define_machine_root(self):
+        """
+        PLC controller connection object definition
+        :return: connection pymcprotocol object
+        """
         pymc3e = pymcprotocol.Type3E()
         if self.target_network and self.plc_id_in_target_network:
             pymc3e.network = self.target_network
@@ -52,21 +89,54 @@ class Machine:
         return pymc3e
 
     def connect(self):
+        """
+        Establish connection with PLC
+        :return:
+        """
         self.machine.connect(ip=self.ip, port=self.port)
 
     def close_connection(self):
+        """
+        Closing connection with PLC
+        :return:
+        """
         self.machine.close()
 
     def read_bits(self, head, size=1):
+        """
+        Reading bits from PLC in order
+        :param head: initial bit address
+        :param size: number of consecutive bits to read
+        :return: list with bit values
+        """
         return self.machine.batchread_bitunits(headdevice=head, readsize=size)
 
     def read_words(self, head, size=1):
+        """
+        Reading words from PLC in order
+        :param head: initial word address
+        :param size: number of consecutive words to read
+        :return: list with words values
+        """
         return self.machine.batchread_wordunits(headdevice=head, readsize=size)
 
-    def read_random_words(self, word_devices=[], double_word_devices=[]):
+    def read_random_words(self, word_devices, double_word_devices):
+        """
+        Reading words from PLC not in order
+        :param word_devices: list of words to read
+        :param double_word_devices: list of dwords to read
+        :return: list of words/dwords values
+        """
         return self.machine.randomread(word_devices=word_devices, dword_devices=double_word_devices)
 
     def write_word(self, head, values):
+        """
+        Writing words to PLC
+        :param head: starting register in PLC
+        :param values: list of values which should be sent to the PLC starts from head number, each parameter of list
+        for one register in PLC
+        :return:
+        """
         self.machine.batchwrite_wordunits(headdevice=head, values=values)
 
     def cumulate_words_addresses_into_list(self):
@@ -154,8 +224,9 @@ class Machine:
             for constant_data in self.endpoints_constructors[endpoint_name]['constant_ng_part_data']:
                 final_json[constant_data] = self.endpoints_constant_data[endpoint_name]['constant_ng_part_data'][
                     constant_data]
-                ### TUTAJ DOPISAC ZE BRAC TEZ DANE Z NG REASON (ID) Z PRODUCTION DATA #if NG REASON ID IN PRODUCTION DATA
-                ### TUTAJ DOPISAC ZE ZEROWAC ID REASON Z (ID) Z PRODUCTION DATA TEN ADRES W PLC
+            if 'Ng Reason (Id)' in self.endpoints_constructors[endpoint_name]['production_data']:
+                final_json['Ng Reason (Id)'] = production_data_dict['Ng Reason (Id)']
+                self.clean_ng_reason_in_plc_register(endpoint_name)
         return final_json
 
     def report_data_to_api(self, endpoint_name, final_json):
@@ -167,75 +238,13 @@ class Machine:
 
     def report_collection_data_completion_in_plc(self, endpointname):
         self.connect()
-        self.write_word(self.data_collection_signals_head[endpointname], [0, 0])
+        self.write_word(self.data_collection_signals_head[endpointname]['data collection'], [0, 0])
         self.close_connection()
 
-    def check_data_collection_status(self):
+    def clean_ng_reason_in_plc_register(self, endpointname):
         self.connect()
-        answer_values_words, answer_values_dwords = \
-            self.read_random_words(word_devices=self.plc_words_address_list,
-                                   double_word_devices=self.plc_dwords_address_list)
+        self.write_word(self.data_collection_signals_head[endpointname]['Ng Reason (Id)'], [0])
         self.close_connection()
-
-        #print('[ANSWER] words values  :', answer_values_words)
-        #print('[ANSWER] dwords values:', answer_values_dwords)
-        address_values_zip = list(zip(self.words_keys, answer_values_words)) +\
-                             list(zip(self.dwords_keys, answer_values_dwords))
-
-        for address, value in address_values_zip:
-            if address.endswith('OK Report Flag') or address.endswith('NG Report Flag'):
-                trigger_status = value
-                #print(trigger_status, type(trigger_status))
-                if trigger_status > 0:
-                #if True:
-                    endpoint_name = address.split('|')[0]
-                    address_values_for_endpoint = [element for element in address_values_zip
-                                                   if element[0].startswith(endpoint_name)]
-                    address_values_dict = {}
-                    for (k, v) in address_values_for_endpoint:
-                        if k not in address_values_dict.keys():
-                            address_values_dict[k] = [v]
-                        else:
-                            address_values_dict[k] = address_values_dict[k] + [v]
-                    data_values = {}
-
-                    ## Construct data from plc as dict key:value final to json
-                    for k, v in address_values_dict.items():
-                        if len(v) > 1:
-                            #print(v)
-                            binary = [bin(b).replace('0b', '').zfill(16) for b in v]
-                            halves_list = [half for word in binary for half in (word[len(word)//2:], word[:len(word) // 2])]
-                            ascii_string = ''.join([chr(int(binary, 2)) for binary in halves_list])
-                            #print(k, ascii_string)
-                            data_values[k.split('|')[1]] = ascii_string.replace(' ', '').replace("\x00", '')
-                        else:
-                            data_values[k.split('|')[1]] = v[0]
-                    json = {}
-
-                    #data_values['OK Report Flag'] = 1
-
-                    ## Construct final JSON
-                    for production_data, v in data_values.items():
-                        if production_data in self.endpoints_constructors[endpoint_name]['production_data']:
-                            json[production_data] = v
-                    if data_values['OK Report Flag'] == 1:
-                        for constant_data in self.endpoints_constructors[endpoint_name]['constant_ok_part_data']:
-                            json[constant_data] = self.endpoints_constant_data[endpoint_name]['constant_ok_part_data'][constant_data]
-                    if data_values['NG Report Flag'] == 1:
-                        for constant_data in self.endpoints_constructors[endpoint_name]['constant_ng_part_data']:
-                            json[constant_data] = self.endpoints_constant_data[endpoint_name]['constant_ng_part_data'][constant_data]
-                    print(['JSON'], k, json)
-
-                    ## Report final JSON
-                    u = self.endpoints_constructors[endpoint_name]['url']
-                    print(u)
-                    print(json)
-                    response = requests.post(u, json=json)
-                    print('Response text:', response.text)
-
-                    self.connect()
-                    self.write_word(self.data_collection_signals_head[k.split('|')[0]], [0, 0])
-                    self.close_connection()
 
     def connection_data_display(self):
         print(

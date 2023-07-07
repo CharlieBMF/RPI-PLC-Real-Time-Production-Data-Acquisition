@@ -96,8 +96,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                  },
-                            'Ng Reason (Id)': ['D413'],
-
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D413'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Weld':
                         {
@@ -154,8 +158,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 2
                                 },
-                            'Ng Reason (Id)': ['D415'],
-
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D415'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Brush':
                         {
@@ -216,7 +224,7 @@ machines_names = {
                     'Press_Fit':
                         {
                             'production_data': ['2D Code', 'Diffuser Lot', 'Diffuser No', 'DF Press Height (mm)',
-                                                'DF Force (kN)'],
+                                                'DF Force (kN)', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/Marking2D',
@@ -224,7 +232,7 @@ machines_names = {
                     'Weld':
                         {
                             'production_data': ['2D Code', 'Program No', 'Output (kW)', 'Runout (mm)', 'Point X',
-                                                'Point Y', 'Point @'],
+                                                'Point Y', 'Point @', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/Marking2D',
@@ -239,10 +247,10 @@ machines_names = {
                 },
             'data_collection_signals_head':
                 {
-                    '2D_Mark': 'D401',
-                    'Press_Fit': 'D403',
-                    'Weld': 'D405',
-                    'Brush': 'D407',
+                    '2D_Mark': {'data collection': 'D401', 'Ng Reason (Id)': 'D411'},
+                    'Press_Fit': {'data collection': 'D403', 'Ng Reason (Id)': 'D413'},
+                    'Weld': {'data collection': 'D405', 'Ng Reason (Id)': 'D415'},
+                    'Brush': {'data collection': 'D407', 'Ng Reason (Id)': 'D417'},
                 },
          },
     'F02':
@@ -392,7 +400,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            'Ng Reason (Id)': ['D411'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D411'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Brush':
                         {
@@ -448,7 +461,7 @@ machines_names = {
                                                 '(2nd side) Pilot Volt (V)', '(2nd side) Weld Volt (V)',
                                                 '(2nd side) Weld Current (A)', '(2nd side) Weld Cycle (ms)',
                                                 '(2nd side) Weld Depth (mm)', '(2nd side) Weld Energy (J)',
-                                                '(2nd side) Lift (mm)', '(2nd side) Ta (ms)'],
+                                                '(2nd side) Lift (mm)', '(2nd side) Ta (ms)', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/StudBolt',
@@ -463,8 +476,8 @@ machines_names = {
                 },
             'data_collection_signals_head':
                 {
-                    'Weld': 'D401',
-                    'Brush': 'D403',
+                    'Weld': {'data collection': 'D401', 'Ng Reason (Id)': 'D411'},
+                    'Brush': {'data collection': 'D403', 'Ng Reason (Id)': 'D413'},
                 },
          },
     'F03':
@@ -598,7 +611,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 2
                                 },
-                            'Ng Reason (Id)': ['D415'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D415'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                 },
             'endpoints_constant_data':
@@ -638,7 +656,7 @@ machines_names = {
                     'Press_Fit':
                         {
                             'production_data': ['2D Code', 'Orifice Lot', 'Orifice No', 'Inner Tube Lot',
-                                                'Inner Tube No', 'Press Height (mm)'],
+                                                'Inner Tube No', 'Press Height (mm)', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/SealTape',
@@ -646,9 +664,9 @@ machines_names = {
                 },
             'data_collection_signals_head':
                 {
-                    'Tape_Pasting': 'D401',
-                    'Img_Insp': 'D403',
-                    'Press_Fit': 'D405',
+                    'Tape_Pasting': {'data collection': 'D401', 'Ng Reason (Id)': 'D411'},
+                    'Img_Insp': {'data collection': 'D403', 'Ng Reason (Id)': 'D413'},
+                    'Press_Fit': {'data collection': 'D405', 'Ng Reason (Id)': 'D415'},
                 },
         },
     'F04':
@@ -701,7 +719,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 2
                                 },
-                            'Ng Reason (Id)': ['D421'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D421'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Charge':
                         {
@@ -793,7 +816,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            'Ng Reason (Id)': ['D425'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D425'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Post_Filling':
                         {
@@ -845,7 +873,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            'Ng Reason (Id)': ['D427'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D427'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Holder1':
                         {
@@ -897,7 +930,12 @@ machines_names = {
                                     'type': 'ascii',
                                     'size': 8,
                                 },
-                            'Ng Reason (Id)': ['D429']
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D429'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Holder2':
                         {
@@ -949,7 +987,12 @@ machines_names = {
                                     'type': 'ascii',
                                     'size': 8,
                                 },
-                            'Ng Reason (Id)': ['D431'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D431'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                 },
             'endpoints_constant_data':
@@ -990,7 +1033,8 @@ machines_names = {
                     'Pre_Metering':
                         {
                             'production_data': ['2D Code', '(preFilling) Jig (PreFilling)',
-                                                '(preFilling) PreFill Weight (g)', '(preFilling) Jig Weight (g)'],
+                                                '(preFilling) PreFill Weight (g)', '(preFilling) Jig Weight (g)',
+                                                'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/HolderPress',
@@ -1006,7 +1050,8 @@ machines_names = {
                         },
                     'Tapping':
                         {
-                            'production_data': ['2D Code', '(Tapping) Height Tap (mm)', '(Tapping) Jig (Tap)'],
+                            'production_data': ['2D Code', '(Tapping) Height Tap (mm)', '(Tapping) Jig (Tap)',
+                                                'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/HolderPress',
@@ -1015,7 +1060,8 @@ machines_names = {
                         {
                             'production_data': ['2D Code', '(postFilling) PosFill Weight (g)',
                                                 '(postFilling) Jig Weight (g)', '(postFilling) Fill Weight (g)',
-                                                '(postFilling) Weight Setting (g)', '(postFilling) Jig (PstFilling)'],
+                                                '(postFilling) Weight Setting (g)', '(postFilling) Jig (PstFilling)',
+                                                'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/HolderPress',
@@ -1024,7 +1070,7 @@ machines_names = {
                         {
                             'production_data': ['2D Code', '(Holder press 1) Height (mm)',
                                                 '(Holder press 1) Force (kN)', '(Holder press 1) Jig (Press)',
-                                                'Holder1 Lot', 'Holder1 No'],
+                                                'Holder1 Lot', 'Holder1 No', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/HolderPress',
@@ -1033,7 +1079,7 @@ machines_names = {
                         {
                             'production_data': ['2D Code', '(Holder press 2) Height (mm)',
                                                 '(Holder press 2) Force (kN)', '(Holder press 2) Jig (Press)',
-                                                'Holder2 Lot', 'Holder2 No'],
+                                                'Holder2 Lot', 'Holder2 No', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/HolderPress',
@@ -1041,12 +1087,12 @@ machines_names = {
                 },
             'data_collection_signals_head':
                 {
-                    'Pre_Metering': 'D401',
-                    'Charge': 'D403',
-                    'Tapping': 'D405',
-                    'Post_Filling': 'D407',
-                    'Holder1': 'D409',
-                    'Holder2': 'D411',
+                    'Pre_Metering': {'data collection': 'D401', 'Ng Reason (Id)': 'D421'},
+                    'Charge': {'data collection': 'D403', 'Ng Reason (Id)': 'D423'},
+                    'Tapping': {'data collection': 'D405', 'Ng Reason (Id)': 'D425'},
+                    'Post_Filling': {'data collection': 'D407', 'Ng Reason (Id)': 'D427'},
+                    'Holder1': {'data collection': 'D409', 'Ng Reason (Id)': 'D429'},
+                    'Holder2': {'data collection': 'D411', 'Ng Reason (Id)': 'D431'},
                 },
         },
     'F05':
@@ -1100,7 +1146,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            'Ng Reason (Id)': ['D421'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D421'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Charge':
                         {
@@ -1186,7 +1237,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            'Ng Reason (Id)': ['D425'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D425'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Post_Filling':
                         {
@@ -1238,7 +1294,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            'Ng Reason (Id)': ['D427'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D427'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Prop_Top':
                         {
@@ -1272,7 +1333,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            'Ng Reason (Id)': ['D429'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D429'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Ini_Press':
                         {
@@ -1336,7 +1402,12 @@ machines_names = {
                                     'type': 'ascii',
                                     'size': 8,
                                 },
-                            'Ng Reason (Id)': ['D431'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D431'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Crimping':
                         {
@@ -1370,7 +1441,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            'Ng Reason (Id)': ['D433'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D433'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Ini_Measure':
                         {
@@ -1398,7 +1474,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 2
                                 },
-                            'Ng Reason (Id)': ['D435'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D435'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                 },
             'endpoints_constant_data':
@@ -1449,7 +1530,8 @@ machines_names = {
                     'Pre_Metering':
                         {
                             'production_data': ['2D Code', '(preFilling) PreFill Weight (g)',
-                                                '(preFilling) Jig Weight (g)', '(preFilling) Jig (PreFilling)'],
+                                                '(preFilling) Jig Weight (g)', '(preFilling) Jig (PreFilling)',
+                                                'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
@@ -1464,7 +1546,8 @@ machines_names = {
                         },
                     'Tapping':
                         {
-                            'production_data': ['2D Code', '(Tapping) Height Tap (mm)', '(Tapping) Jig (Tap)'],
+                            'production_data': ['2D Code', '(Tapping) Height Tap (mm)', '(Tapping) Jig (Tap)',
+                                                'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
@@ -1480,7 +1563,8 @@ machines_names = {
                         },
                     'Prop_Top':
                         {
-                            'production_data': ['2D Code', '(Prop Top) Height (mm)', '(Prop Top) Jig'],
+                            'production_data': ['2D Code', '(Prop Top) Height (mm)', '(Prop Top) Jig',
+                                                'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
@@ -1489,21 +1573,22 @@ machines_names = {
                         {
                             'production_data': ['2D Code', '(Initiator) Height (mm)', '(Initiator) Jig',
                                                 'Load Force (kN)', 'Initiator Lot', 'Initiator No', 'O-Ring Lot',
-                                                'O-Ring No'],
+                                                'O-Ring No', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
                         },
                     'Crimping':
                         {
-                            'production_data': ['2D Code', '(Crimping) Height (mm)', '(Crimping) Jig'],
+                            'production_data': ['2D Code', '(Crimping) Height (mm)', '(Crimping) Jig',
+                                                'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
                         },
                     'Ini_Measure':
                         {
-                            'production_data': ['2D Code', 'Offset Initiator'],
+                            'production_data': ['2D Code', 'Offset Initiator', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
@@ -1511,14 +1596,14 @@ machines_names = {
                 },
             'data_collection_signals_head':
                 {
-                    'Pre_Metering': 'D401',
-                    'Charge': 'D403',
-                    'Tapping': 'D405',
-                    'Post_Filling': 'D407',
-                    'Prop_Top': 'D409',
-                    'Ini_Press': 'D411',
-                    'Crimping': 'D413',
-                    'Ini_Measure': 'D415',
+                    'Pre_Metering': {'data collection': 'D401', 'Ng Reason (Id)': 'D421'},
+                    'Charge': {'data collection': 'D403', 'Ng Reason (Id)': 'D423'},
+                    'Tapping': {'data collection': 'D405', 'Ng Reason (Id)': 'D425'},
+                    'Post_Filling': {'data collection': 'D407', 'Ng Reason (Id)': 'D427'},
+                    'Prop_Top': {'data collection': 'D409', 'Ng Reason (Id)': 'D429'},
+                    'Ini_Press': {'data collection': 'D411', 'Ng Reason (Id)': 'D431'},
+                    'Crimping': {'data collection': 'D413', 'Ng Reason (Id)': 'D433'},
+                    'Ini_Measure': {'data collection': 'D415', 'Ng Reason (Id)': 'D435'},
                 },
         },
     'F06':
@@ -1583,7 +1668,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            'Ng Reason (Id)': ['D421'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D421'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Air_Leak2':
                         {
@@ -1635,7 +1725,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            'Ng Reason (Id)': ['D423'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D423'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Air_Leak3':
                         {
@@ -1687,7 +1782,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            'Ng Reason (Id)': ['D425'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D425'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'Barcode':
                         {
@@ -1758,7 +1858,7 @@ machines_names = {
                     'Air_Leak1':
                         {
                             'production_data': ['2D Code', 'Pressure Large (kPa)', 'Pressure Small (kPa)', 'Leak (Pa)',
-                                                'Leak Cycle (sec)', 'Program No'],
+                                                'Leak Cycle (sec)', 'Program No', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/AirLeak',
@@ -1766,7 +1866,7 @@ machines_names = {
                     'Air_Leak2':
                         {
                             'production_data': ['2D Code', 'Pressure Large (kPa)', 'Pressure Small (kPa)', 'Leak (Pa)',
-                                                'Leak Cycle (sec)', 'Program No'],
+                                                'Leak Cycle (sec)', 'Program No', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/AirLeak',
@@ -1774,7 +1874,7 @@ machines_names = {
                     'Air_Leak3':
                         {
                             'production_data': ['2D Code', 'Pressure Large (kPa)', 'Pressure Small (kPa)', 'Leak (Pa)',
-                                                'Leak Cycle (sec)', 'Program No'],
+                                                'Leak Cycle (sec)', 'Program No', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/AirLeak',
@@ -1789,10 +1889,10 @@ machines_names = {
                 },
             'data_collection_signals_head':
                 {
-                    'Air_Leak1': 'D401',
-                    'Air_Leak2': 'D403',
-                    'Air_Leak3': 'D405',
-                    'Barcode': 'D407',
+                    'Air_Leak1': {'data collection': 'D401', 'Ng Reason (Id)': 'D421'},
+                    'Air_Leak2': {'data collection': 'D403', 'Ng Reason (Id)': 'D423'},
+                    'Air_Leak3': {'data collection': 'D405', 'Ng Reason (Id)': 'D425'},
+                    'Barcode': {'data collection': 'D407', 'Ng Reason (Id)': 'D427'},
                 },
         },
     'F07':
@@ -1851,7 +1951,12 @@ machines_names = {
                                     'type': 'ascii',
                                     'size': 8
                                 },
-                            'Ng Reason (Id)': ['D421'],
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D421'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                 },
             'endpoints_constant_data':
@@ -1866,7 +1971,8 @@ machines_names = {
                 {
                     'SC_Charge':
                         {
-                            'production_data': ['Barcode', 'Offset (mm)', 'Height (mm)', 'S-Clip Lot', 'S-Clip No'],
+                            'production_data': ['Barcode', 'Offset (mm)', 'Height (mm)', 'S-Clip Lot', 'S-Clip No',
+                                                'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/ShortingClip',
@@ -1874,7 +1980,7 @@ machines_names = {
                 },
             'data_collection_signals_head':
                 {
-                    'SC_Charge': 'D401',
+                    'SC_Charge': {'data collection': 'D401', 'Ng Reason (Id)': 'D421'},
                 },
         },
     'F08':
@@ -1949,7 +2055,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 2
                                 },
-                            # 'Ng Reason (Id)': 'XXXXX',
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D423'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'ETest1':
                         {
@@ -2013,7 +2124,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            # 'Ng Reason (Id)': 'XXXXX',
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D425'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                     'ETest2':
                         {
@@ -2077,7 +2193,12 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            # 'Ng Reason (Id)': 'XXXXX',
+                            'Ng Reason (Id)':
+                                {
+                                    'address': ['D427'],
+                                    'type': int,
+                                    'size': 1,
+                                },
                         },
                 },
             'endpoints_constant_data':
@@ -2114,23 +2235,25 @@ machines_names = {
                         },
                     'Weight':
                         {
-                            'production_data': ['2D Code', 'Finel Weigh Weight (g)'],
+                            'production_data': ['2D Code', 'Finel Weigh Weight (g)', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/FinalWeight',
                         },
                     'ETest1':
                         {
-                            'production_data': ['Barcode', 'Resistance (om)', 'Isolation (om)', 'Current (mA)', 'Cycle (sec)',
-                                                'Pin resistance (om)', 'Pin grounding2 (om)', 'S.Clip grounding1 (om)'],
+                            'production_data': ['Barcode', 'Resistance (om)', 'Isolation (om)', 'Current (mA)',
+                                                'Cycle (sec)', 'Pin resistance (om)', 'Pin grounding2 (om)',
+                                                'S.Clip grounding1 (om)', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/FinalWeight',
                         },
                     'ETest2':
                         {
-                            'production_data': ['Barcode', 'Resistance (om)', 'Isolation (om)', 'Current (mA)', 'Cycle (sec)',
-                                                'Pin resistance (om)', 'Pin grounding2 (om)', 'S.Clip grounding1 (om)'],
+                            'production_data': ['Barcode', 'Resistance (om)', 'Isolation (om)', 'Current (mA)',
+                                                'Cycle (sec)', 'Pin resistance (om)', 'Pin grounding2 (om)',
+                                                'S.Clip grounding1 (om)', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/FinalWeight',
@@ -2138,10 +2261,10 @@ machines_names = {
                 },
             'data_collection_signals_head':
                 {
-                    'CL_Pasting': 'D401',
-                    'Weight': 'D403',
-                    'ETest1': 'D405',
-                    'ETest2': 'D407',
+                    'CL_Pasting': {'data collection': 'D401', 'Ng Reason (Id)': 'D421'},
+                    'Weight': {'data collection': 'D403', 'Ng Reason (Id)': 'D423'},
+                    'ETest1': {'data collection': 'D405', 'Ng Reason (Id)': 'D425'},
+                    'ETest2': {'data collection': 'D407', 'Ng Reason (Id)': 'D427'},
                 },
         },
 }

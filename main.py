@@ -18,102 +18,25 @@ def create_machine_classes():
 
 
 list_of_machine_classes = create_machine_classes()
-
-
-#for i in range(0, 1500):
 while True:
     starto = time.time()
     for machine_class in list_of_machine_classes:
-       # machine_class.check_data_collection_status()
-        plc_words_values, plc_dwords_values = machine_class.read_data_from_plc()
-        keys_and_plc_values = machine_class.connect_keys_with_answer_values(plc_words_values, plc_dwords_values)
-        for address, value in keys_and_plc_values:
-            if address.endswith('OK Report Flag') or address.endswith('NG Report Flag'):
-                if machine_class.check_report_flags(value):
-                    endpoint_name = address.split('|')[0]
-                    keys_answer_dict = machine_class.create_keys_and_answers_dict(endpoint_name, keys_and_plc_values)
-                    print(keys_answer_dict)
-                    production_data_dict = machine_class.construct_json_from_plc_data(keys_answer_dict)
-                    print(production_data_dict)
-                    final_json = machine_class.construct_final_json(endpoint_name, production_data_dict)
-                    machine_class.report_data_to_api(endpoint_name, final_json)
-                    machine_class.report_collection_data_completion_in_plc(endpoint_name)
-
+        try:
+            plc_words_values, plc_dwords_values = machine_class.read_data_from_plc()
+        except:
+            continue
+        else:
+            keys_and_plc_values = machine_class.connect_keys_with_answer_values(plc_words_values, plc_dwords_values)
+            for address, value in keys_and_plc_values:
+                if address.endswith('OK Report Flag') or address.endswith('NG Report Flag'):
+                    if machine_class.check_report_flags(value):
+                        endpoint_name = address.split('|')[0]
+                        keys_answer_dict = machine_class.create_keys_and_answers_dict(endpoint_name, keys_and_plc_values)
+                        print(keys_answer_dict)
+                        production_data_dict = machine_class.construct_json_from_plc_data(keys_answer_dict)
+                        print(production_data_dict)
+                        final_json = machine_class.construct_final_json(endpoint_name, production_data_dict)
+                        machine_class.report_data_to_api(endpoint_name, final_json)
+                        machine_class.report_collection_data_completion_in_plc(endpoint_name)
     endo = time.time()
     print(f'Full line loop time: {endo-starto}')
-
-
-##################################### ASYNCIO
-# async def communication_open(machine_class):
-#     await machine_class.connect()
-#     #await asyncio.sleep(0)
-#
-#
-# async def communication_close(machine_class):
-#     await machine_class.close_connection()
-#     #await asyncio.sleep(0)
-#
-#
-#
-#
-# async def main():
-#     starto = time.time()
-#     # c_open = [asyncio.create_task(communication_open(i)) for i in list_of_machine_classes]
-#     # c_close = [asyncio.create_task(communication_close(i)) for i in list_of_machine_classes]
-#     for i in range(0, 15):
-#         s = time.time()
-#
-#         await asyncio.gather(communication_open(list_of_machine_classes[1]),
-#                              communication_open(list_of_machine_classes[2]),
-#                              communication_open(list_of_machine_classes[3]))
-#         await asyncio.gather(communication_close(list_of_machine_classes[1]),
-#                              communication_close(list_of_machine_classes[2]),
-#                              communication_close(list_of_machine_classes[3]),
-#                              )
-#         print(f'Loop scan time: {time.time() - s}')
-#     endo = time.time()
-#     print(f'Full scan time: {endo-starto}')
-#
-# asyncio.run(main())
-
-
-##################################### MULTIPROCESSING
-# import asyncio
-# from multiprocessing import Process, Lock
-# from multiprocessing.managers import BaseManager
-#
-#
-# class MyManager(BaseManager):
-#     pass
-#
-#
-# MyManager.register('klasa_maszyn', Machine)
-#
-# manager = MyManager()
-# manager.start()
-# f1 = manager.klasa_maszyn(id_line=machines_names['F01']['id_line'], id_machine=machines_names['F01']['id_machine'], name=machines_names['F01']['name'], ip=machines_names['F01']['ip'], port=machines_names['F01']['port'], master_on_address=machines_names['F01']['address']['master_on_address'], machine_status_address=machines_names['F01']['address']['machine_status_address'], mct_address=machines_names['F01']['address']['mct_address'])
-# f2 = manager.klasa_maszyn(id_line=machines_names['F02']['id_line'], id_machine=machines_names['F02']['id_machine'], name=machines_names['F02']['name'], ip=machines_names['F02']['ip'], port=machines_names['F02']['port'], master_on_address=machines_names['F02']['address']['master_on_address'], machine_status_address=machines_names['F02']['address']['machine_status_address'], mct_address=machines_names['F02']['address']['mct_address'])
-# f3 = manager.klasa_maszyn(id_line=machines_names['F03']['id_line'], id_machine=machines_names['F03']['id_machine'], name=machines_names['F03']['name'], ip=machines_names['F03']['ip'], port=machines_names['F03']['port'], master_on_address=machines_names['F03']['address']['master_on_address'], machine_status_address=machines_names['F03']['address']['machine_status_address'], mct_address=machines_names['F03']['address']['mct_address'])
-# f4 = manager.klasa_maszyn(id_line=machines_names['F04']['id_line'], id_machine=machines_names['F04']['id_machine'], name=machines_names['F04']['name'], ip=machines_names['F04']['ip'], port=machines_names['F04']['port'], master_on_address=machines_names['F04']['address']['master_on_address'], machine_status_address=machines_names['F04']['address']['machine_status_address'], mct_address=machines_names['F04']['address']['mct_address'])
-# f5 = manager.klasa_maszyn(id_line=machines_names['F05']['id_line'], id_machine=machines_names['F05']['id_machine'], name=machines_names['F05']['name'], ip=machines_names['F05']['ip'], port=machines_names['F05']['port'], master_on_address=machines_names['F05']['address']['master_on_address'], machine_status_address=machines_names['F05']['address']['machine_status_address'], mct_address=machines_names['F05']['address']['mct_address'])
-# f6 = manager.klasa_maszyn(id_line=machines_names['F06']['id_line'], id_machine=machines_names['F06']['id_machine'], name=machines_names['F06']['name'], ip=machines_names['F06']['ip'], port=machines_names['F06']['port'], master_on_address=machines_names['F06']['address']['master_on_address'], machine_status_address=machines_names['F06']['address']['machine_status_address'], mct_address=machines_names['F06']['address']['mct_address'])
-# f7 = manager.klasa_maszyn(id_line=machines_names['F07']['id_line'], id_machine=machines_names['F07']['id_machine'], name=machines_names['F07']['name'], ip=machines_names['F07']['ip'], port=machines_names['F07']['port'], master_on_address=machines_names['F07']['address']['master_on_address'], machine_status_address=machines_names['F07']['address']['machine_status_address'], mct_address=machines_names['F07']['address']['mct_address'])
-# f8 = manager.klasa_maszyn(id_line=machines_names['F08']['id_line'], id_machine=machines_names['F08']['id_machine'], name=machines_names['F08']['name'], ip=machines_names['F08']['ip'], port=machines_names['F08']['port'], master_on_address=machines_names['F08']['address']['master_on_address'], machine_status_address=machines_names['F08']['address']['machine_status_address'], mct_address=machines_names['F08']['address']['mct_address'])
-#
-# list_of_machine_classes = [f1, f2, f3, f4]
-#
-# starto = time.time()
-# for i in range(0, 150):
-#     s = time.time()
-#     p_open = [Process(target=target.connect) for target in list_of_machine_classes]
-#     p_close = [Process(target=target.close_connection) for target in list_of_machine_classes]
-#     for p in p_open:
-#         p.start()
-#     for p in p_open:
-#         p.join()
-#     for p in p_close:
-#         p.start()
-#     for p in p_close:
-#         p.join()
-#
-# print(f'Full scan time: {time.time() - starto}')

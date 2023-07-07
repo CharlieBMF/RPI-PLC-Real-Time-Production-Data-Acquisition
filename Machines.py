@@ -199,7 +199,7 @@ class Machine:
         for k, v in keys_answer_dict.items():
             if len(v) > 1:
                 ascii_string = self.convert_decimal_from_plc_into_ascii_string(v)
-                data_values[k.split('|')[1]] = ascii_string.replace(' ', '').replace("\x00", '')
+                data_values[k.split('|')[1]] = ascii_string.replace(' ', '').replace("\x00", '').replace("\r", '')
             else:
                 data_values[k.split('|')[1]] = v[0]
         return data_values
@@ -220,6 +220,7 @@ class Machine:
             for constant_data in self.endpoints_constructors[endpoint_name]['constant_ok_part_data']:
                 final_json[constant_data] = self.endpoints_constant_data[endpoint_name]['constant_ok_part_data'][
                     constant_data]
+                final_json['Ng Reason (Id)'] = 0
         if production_data_dict['NG Report Flag'] == 1:
             for constant_data in self.endpoints_constructors[endpoint_name]['constant_ng_part_data']:
                 final_json[constant_data] = self.endpoints_constant_data[endpoint_name]['constant_ng_part_data'][
@@ -244,6 +245,7 @@ class Machine:
     def clean_ng_reason_in_plc_register(self, endpointname):
         self.connect()
         self.write_word(self.data_collection_signals_head[endpointname]['Ng Reason (Id)'], [0])
+        print('Cleaning...', self.data_collection_signals_head[endpointname]['Ng Reason (Id)'])
         self.close_connection()
 
     def connection_data_display(self):
@@ -257,4 +259,3 @@ class Machine:
             f'Target other network: {self.target_network}\n'
             f'PLC id in other network: {self.plc_id_in_target_network}\n'
         )
-

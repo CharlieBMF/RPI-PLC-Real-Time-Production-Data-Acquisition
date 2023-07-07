@@ -1185,19 +1185,19 @@ machines_names = {
                                     'type': 'int',
                                     'size': 1
                                 },
-                            '(Filling) Humidity':
+                            'Humidity':
                                 {
                                     'address': ['W0DD2'],
                                     'type': 'int',
                                     'size': 1
                                 },
-                            '(Filling) Temperature':
+                            'Temperature':
                                 {
                                     'address': ['W0DD3'],
                                     'type': 'int',
                                     'size': 1
                                 },
-                            '(Filling) Dewpoint':
+                            'Dewpoint':
                                 {
                                     'address': ['W0DD4'],
                                     'type': 'int',
@@ -1539,7 +1539,7 @@ machines_names = {
                     'Charge':
                         {
                             'production_data': ['2D Code', '(Filling) CID', '(Filling) Jig (Filling)',
-                                                '(Filling) Humidity', '(Filling) Temperature', '(Filling) Dewpoint'],
+                                                'Humidity', 'Temperature', 'Dewpoint'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/InitiatorCrimping',
@@ -2235,7 +2235,7 @@ machines_names = {
                         },
                     'Weight':
                         {
-                            'production_data': ['2D Code', 'Finel Weigh Weight (g)', 'Ng Reason (Id)'],
+                            'production_data': ['Barcode', 'Finel Weigh Weight (g)', 'Ng Reason (Id)'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/FinalWeight',

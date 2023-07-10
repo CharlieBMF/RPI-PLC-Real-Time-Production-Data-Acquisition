@@ -1,3 +1,4 @@
+
 """
 Real Time Data collection from production line. Contains all the methods necessary to collect data.
 """
@@ -14,15 +15,13 @@ def time_wrapper(func):
     :param func: any function
     :return: wrapped function
     """
-
     def wrap(*args, **kwargs):
         start = time.time()
         result = func(*args, **kwargs)
         end = time.time()
-        if end - start > 1:
-            print(f'Func {func.__name__} started: {start} finished: {end} Time: {end - start}')
+        if end-start > 1:
+            print(f'Func {func.__name__} started: {start} finished: {end} Time: {end-start}')
         return result
-
     return wrap
 
 
@@ -170,7 +169,7 @@ class Machine:
         for endpoint in self.endpoints:
             for data in self.endpoints_data_values[endpoint]:
                 if self.endpoints_data_values[endpoint][data]['size'] != 2:
-                    keys_words.extend([endpoint + '|' + data] * self.endpoints_data_values[endpoint][data]['size'])
+                    keys_words.extend([endpoint + '|' + data]*self.endpoints_data_values[endpoint][data]['size'])
                 else:
                     keys_dwords.extend([endpoint + '|' + data])
         return keys_words, keys_dwords
@@ -196,8 +195,8 @@ class Machine:
         :param answer_values_dwords: answer values from PLC for read dwords
         :return: list of values from PLC and names for this value
         """
-        address_values_zip = list(zip(self.words_keys, answer_values_words)) + \
-                             list(zip(self.dwords_keys, answer_values_dwords))
+        address_values_zip = list(zip(self.words_keys, answer_values_words)) + list(zip(
+            self.dwords_keys, answer_values_dwords))
         return address_values_zip
 
     def construct_json_from_plc_data(self, keys_answer_dict):
@@ -285,7 +284,7 @@ class Machine:
         :return: 
         """
         print(
-            '*' * 20,
+            '*'*20,
             f'\nLine: {self.id_line}\n'
             f'Machine: {self.id_machine}\n'
             f'Name: {self.name}\n'
@@ -326,7 +325,7 @@ class Machine:
             else:
                 address_values_dict[k] = address_values_dict[k] + [v]
         return address_values_dict
-
+    
     @staticmethod
     def convert_decimal_from_plc_into_ascii_string(decimal_list):
         """

@@ -1,4 +1,3 @@
-
 """
 Real Time Data collection from production line. Contains all the methods necessary to collect data.
 """
@@ -15,13 +14,15 @@ def time_wrapper(func):
     :param func: any function
     :return: wrapped function
     """
+
     def wrap(*args, **kwargs):
         start = time.time()
         result = func(*args, **kwargs)
         end = time.time()
-        if end-start > 1:
-            print(f'Func {func.__name__} started: {start} finished: {end} Time: {end-start}')
+        if end - start > 1:
+            print(f'Func {func.__name__} started: {start} finished: {end} Time: {end - start}')
         return result
+
     return wrap
 
 
@@ -140,28 +141,46 @@ class Machine:
         self.machine.batchwrite_wordunits(headdevice=head, values=values)
 
     def cumulate_words_addresses_into_list(self):
+        """
+        Creates a list of word addresses which should be read from PLC. 
+        :return: list of word addresses
+        """
         words_address_list = []
         for address in self.plc_addresses_words:
             words_address_list.extend(address)
         return words_address_list
 
     def cumulate_dwords_addresses_into_list(self):
+        """
+        Creates a list of dwords addresses which should be read from PLC.
+        :return: list of dword addresses
+        """
         dwords_address_list = []
         for address in self.plc_addresses_dwords:
             dwords_address_list.extend(address)
         return dwords_address_list
 
     def generate_list_of_keys_for_address_lists(self):
+        """
+        Create two lists of words and dwords variable names which should be read from PLC. Additionally the name of the
+        value in list starts with the name of endpoint like [Marking|2D_Code, Marking|Length, Weld|2D_Code]
+        :return: list of word addresses, list of dword addresses
+        """
         keys_words, keys_dwords = [], []
         for endpoint in self.endpoints:
             for data in self.endpoints_data_values[endpoint]:
                 if self.endpoints_data_values[endpoint][data]['size'] != 2:
-                    keys_words.extend([endpoint + '|' + data]*self.endpoints_data_values[endpoint][data]['size'])
+                    keys_words.extend([endpoint + '|' + data] * self.endpoints_data_values[endpoint][data]['size'])
                 else:
                     keys_dwords.extend([endpoint + '|' + data])
         return keys_words, keys_dwords
 
     def read_data_from_plc(self):
+        """
+        Connects with machine, reads words and dwords according to list of words and dwords created in
+        cumulate_words_addresses_into list and cumulate_dwords_addresses_into_list, close connection
+        :return: list of values in PLC words, list of values in PLC dwords
+        """
         self.connect()
         answer_values_words, answer_values_dwords = \
             self.read_random_words(word_devices=self.plc_words_address_list,
@@ -170,31 +189,24 @@ class Machine:
         return answer_values_words, answer_values_dwords
 
     def connect_keys_with_answer_values(self, answer_values_words, answer_values_dwords):
-        address_values_zip = list(zip(self.words_keys, answer_values_words)) +\
+        """
+        Creates a list which contains a zip of answer values from PLC (from read_data_from_plc method) and
+        names of the value for words and dwords (from generate_list_of_keys_from_address_lists)
+        :param answer_values_words: answer values from PLC for read words
+        :param answer_values_dwords: answer values from PLC for read dwords
+        :return: list of values from PLC and names for this value
+        """
+        address_values_zip = list(zip(self.words_keys, answer_values_words)) + \
                              list(zip(self.dwords_keys, answer_values_dwords))
         return address_values_zip
 
-    @staticmethod
-    def check_report_flags(value):
-        trigger_status = value
-        if trigger_status > 0:
-            return True
-        else:
-            return False
-
-    @staticmethod
-    def create_keys_and_answers_dict(endpoint_name, keys_and_plc_values):
-        address_values_for_endpoint = [element for element in keys_and_plc_values
-                                       if element[0].startswith(endpoint_name)]
-        address_values_dict = {}
-        for (k, v) in address_values_for_endpoint:
-            if k not in address_values_dict.keys():
-                address_values_dict[k] = [v]
-            else:
-                address_values_dict[k] = address_values_dict[k] + [v]
-        return address_values_dict
-
     def construct_json_from_plc_data(self, keys_answer_dict):
+        """
+        Constructs the json from production data acquired from PLC. If the length of list of value is bigger than 1
+        means that it is ascii code so the value is converted from decimal into ascii code with additional method
+        :param keys_answer_dict: dict of keys and values read from plc 
+        :return: prepared json with production data for each endpoint
+        """
         data_values = {}
         for k, v in keys_answer_dict.items():
             if len(v) > 1:
@@ -204,14 +216,17 @@ class Machine:
                 data_values[k.split('|')[1]] = v[0]
         return data_values
 
-    @staticmethod
-    def convert_decimal_from_plc_into_ascii_string(decimal_list):
-        binary = [bin(b).replace('0b', '').zfill(16) for b in decimal_list]
-        halves_list = [half for word in binary for half in (word[len(word) // 2:], word[:len(word) // 2])]
-        ascii_string = ''.join([chr(int(binary, 2)) for binary in halves_list])
-        return ascii_string
-
     def construct_final_json(self, endpoint_name, production_data_dict):
+        """
+        Constructs the final json contains: 
+        1. Production data
+        2. Constant data which depends on the status of piece (OK/NG)
+        3. NG reason id if it is NG piece
+        If it is NG piece the NG reason id register is cleaned in the PLC by additional method 
+        :param endpoint_name: the name of the endpoint for json
+        :param production_data_dict: production data json 
+        :return: full json contains all data required for each endpoint
+        """
         final_json = {}
         for production_data, v in production_data_dict.items():
             if production_data in self.endpoints_constructors[endpoint_name]['production_data']:
@@ -231,6 +246,12 @@ class Machine:
         return final_json
 
     def report_data_to_api(self, endpoint_name, final_json):
+        """
+        Sends the data to the api
+        :param endpoint_name: name of the endpoint
+        :param final_json: full json required by the api
+        :return: 
+        """
         url = self.endpoints_constructors[endpoint_name]['url']
         print(url)
         print(final_json)
@@ -238,19 +259,33 @@ class Machine:
         print('Response text:', response.text)
 
     def report_collection_data_completion_in_plc(self, endpointname):
+        """
+        Opens connection, reset data collection signals in the PLC if data is properly send to the API, close connection
+        :param endpointname: endpoint name
+        :return: 
+        """
         self.connect()
         self.write_word(self.data_collection_signals_head[endpointname]['data collection'], [0, 0])
         self.close_connection()
 
     def clean_ng_reason_in_plc_register(self, endpointname):
+        """
+        Opens connection, clean ng reason id register in the plc, close connection
+        :param endpointname: 
+        :return: 
+        """
         self.connect()
         self.write_word(self.data_collection_signals_head[endpointname]['Ng Reason (Id)'], [0])
         print('Cleaning...', self.data_collection_signals_head[endpointname]['Ng Reason (Id)'])
         self.close_connection()
 
     def connection_data_display(self):
+        """
+        Displays a data of the machine and connection
+        :return: 
+        """
         print(
-            '*'*20,
+            '*' * 20,
             f'\nLine: {self.id_line}\n'
             f'Machine: {self.id_machine}\n'
             f'Name: {self.name}\n'
@@ -259,3 +294,47 @@ class Machine:
             f'Target other network: {self.target_network}\n'
             f'PLC id in other network: {self.plc_id_in_target_network}\n'
         )
+
+    @staticmethod
+    def check_report_flags(value):
+        """
+        Checks trigger status for data collection in PLC
+        :param value: value of trigger
+        :return: T/F depends on the status
+        """
+        trigger_status = value
+        if trigger_status > 0:
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def create_keys_and_answers_dict(endpoint_name, keys_and_plc_values):
+        """
+        Creates a dictionary for the name of values and value from the plc like {name_of_value: [v1, (..)]}. The length
+        of a list depends on the length of a value configured in conf.py file
+        :param endpoint_name: the name of the endpoint for the data
+        :param keys_and_plc_values: list of the names and values from PLC
+        :return: dictionary of names and values
+        """
+        address_values_for_endpoint = [element for element in keys_and_plc_values
+                                       if element[0].startswith(endpoint_name)]
+        address_values_dict = {}
+        for (k, v) in address_values_for_endpoint:
+            if k not in address_values_dict.keys():
+                address_values_dict[k] = [v]
+            else:
+                address_values_dict[k] = address_values_dict[k] + [v]
+        return address_values_dict
+
+    @staticmethod
+    def convert_decimal_from_plc_into_ascii_string(decimal_list):
+        """
+        Converts list of decimal values into ascii code
+        :param decimal_list: list of decimal values
+        :return: ascii code
+        """
+        binary = [bin(b).replace('0b', '').zfill(16) for b in decimal_list]
+        halves_list = [half for word in binary for half in (word[len(word) // 2:], word[:len(word) // 2])]
+        ascii_string = ''.join([chr(int(binary, 2)) for binary in halves_list])
+        return ascii_string

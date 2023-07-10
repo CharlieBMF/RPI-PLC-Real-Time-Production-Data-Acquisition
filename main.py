@@ -34,9 +34,7 @@ while True:
                     if machine_class.check_report_flags(value):
                         endpoint_name = address.split('|')[0]
                         keys_answer_dict = machine_class.create_keys_and_answers_dict(endpoint_name, keys_and_plc_values)
-                       # print(keys_answer_dict)
                         production_data_dict = machine_class.construct_json_from_plc_data(keys_answer_dict)
-                       # print(production_data_dict)
                         final_json = machine_class.construct_final_json(endpoint_name, production_data_dict)
                         machine_class.report_data_to_api(endpoint_name, final_json)
                         machine_class.report_collection_data_completion_in_plc(endpoint_name)

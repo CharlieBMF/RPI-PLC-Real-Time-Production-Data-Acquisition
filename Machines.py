@@ -141,7 +141,7 @@ class Machine:
 
     def cumulate_words_addresses_into_list(self):
         """
-        Creates a list of word addresses which should be read from PLC. 
+        Creates a list of word addresses which should be read from PLC.
         :return: list of word addresses
         """
         words_address_list = []
@@ -203,7 +203,7 @@ class Machine:
         """
         Constructs the json from production data acquired from PLC. If the length of list of value is bigger than 1
         means that it is ascii code so the value is converted from decimal into ascii code with additional method
-        :param keys_answer_dict: dict of keys and values read from plc 
+        :param keys_answer_dict: dict of keys and values read from plc
         :return: prepared json with production data for each endpoint
         """
         data_values = {}
@@ -217,13 +217,13 @@ class Machine:
 
     def construct_final_json(self, endpoint_name, production_data_dict):
         """
-        Constructs the final json contains: 
+        Constructs the final json contains:
         1. Production data
         2. Constant data which depends on the status of piece (OK/NG)
         3. NG reason id if it is NG piece
-        If it is NG piece the NG reason id register is cleaned in the PLC by additional method 
+        If it is NG piece the NG reason id register is cleaned in the PLC by additional method
         :param endpoint_name: the name of the endpoint for json
-        :param production_data_dict: production data json 
+        :param production_data_dict: production data json
         :return: full json contains all data required for each endpoint
         """
         final_json = {}
@@ -249,7 +249,7 @@ class Machine:
         Sends the data to the api
         :param endpoint_name: name of the endpoint
         :param final_json: full json required by the api
-        :return: 
+        :return:
         """
         url = self.endpoints_constructors[endpoint_name]['url']
         print(url)
@@ -261,7 +261,7 @@ class Machine:
         """
         Opens connection, reset data collection signals in the PLC if data is properly send to the API, close connection
         :param endpointname: endpoint name
-        :return: 
+        :return:
         """
         self.connect()
         self.write_word(self.data_collection_signals_head[endpointname]['data collection'], [0, 0])
@@ -270,8 +270,8 @@ class Machine:
     def clean_ng_reason_in_plc_register(self, endpointname):
         """
         Opens connection, clean ng reason id register in the plc, close connection
-        :param endpointname: 
-        :return: 
+        :param endpointname:
+        :return:
         """
         self.connect()
         self.write_word(self.data_collection_signals_head[endpointname]['Ng Reason (Id)'], [0])
@@ -281,7 +281,7 @@ class Machine:
     def connection_data_display(self):
         """
         Displays a data of the machine and connection
-        :return: 
+        :return:
         """
         print(
             '*'*20,
@@ -325,7 +325,7 @@ class Machine:
             else:
                 address_values_dict[k] = address_values_dict[k] + [v]
         return address_values_dict
-    
+
     @staticmethod
     def convert_decimal_from_plc_into_ascii_string(decimal_list):
         """

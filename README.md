@@ -16,6 +16,3 @@ Script allowing to acquire real time data from Mitsubishi PLC on production line
 ![image](https://github.com/CharlieBMF/RPI-PLC-Real-Time-Production-Data-Acquisition/assets/109242797/f12275a5-c30a-4335-a190-a75aca4f8a24)
 
 # Description 
-
-
-

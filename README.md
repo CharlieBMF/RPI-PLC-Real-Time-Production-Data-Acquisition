@@ -1,5 +1,5 @@
 # RPI-PLC-Real-Time-Production-Data-Acquisition
-Script allowing to acquire real time data from Mitsubishi PLC on production line. Acquired data is being sent to API.
+Software used to read production data in real time from machines on the line. These data are sent to mssql using API, and then it is possible to analyze them, implement AI solutions, or visualize them on dashboards. The software is based on communication frames with mitsbushisi PLC controllers. It is possible to use any model (in this case, the Q series was used). The software located on the RPI microcomputer reads the data defined in the conf file from the appropriate machine using the communication frame. Then the received response is analyzed. If the appropriate flag about the report of a new item appears, further analysis of the response takes place - the data is read and placed in the corresponding table (depends on machine) in mssql with the appropriate information whether it is an item finished ok, ng or in production. Everything is done in real time with a full readout of all machines in the line taking 0.05s
 
 # Hardware
 
@@ -28,7 +28,7 @@ The software has been divided into 3 main scripts:
 
 # conf.py
 
-''' python 
+  ```python
     'F07':
         {
             'id_line': 32,
@@ -116,8 +116,8 @@ The software has been divided into 3 main scripts:
                 {
                     'SC_Charge': {'data collection': 'D401', 'Ng Reason (Id)': 'D421'},
                 },
-        },    
-        '''
+        },
+  ```
 
 # main.py
 

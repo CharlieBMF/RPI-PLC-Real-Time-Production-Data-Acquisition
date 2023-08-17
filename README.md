@@ -119,6 +119,65 @@ The software has been divided into 3 main scripts:
         },
   ```
 
+```
+'id_line': id of line used to define in sql,
+'id_machine': id of machine used to define in sql,
+'name': name of the machine for display,
+'ip': IP address of machine PLC,
+'port': port used to connect to PLC,
+'target_network': it is possible to use ETH connecting to one point and then change network to fiber to connect to other point, this is the number of fiber network configured in PLC None if not used
+'plc_id_in_target_network': id number of PLC in fiber network, None if not used
+'endpoints': list of endpoints which triggers production data acquisition, it is possible to use several endpoints on one machine, when one machine reports production data in several places
+'endpoints_data_values': a dictionary defining what production data are read in individual endpoints
+    {
+        'SC_Charge':
+            {
+                'OK Report Flag': flag lights up in case of piece OK, mandatory for each endpoint
+                    {
+                        'address': the address of the register in the PLC that is assigned to the value
+                        'type': variable type
+                        'size': length of consecutive registers necessary to read
+                    },
+                'NG Report Flag': flag lights up in case of piece NG, mandatory for each endpoint
+                    {
+                        'address': the address of the register in the PLC that is assigned to the value
+                        'type': variable type
+                        'size': length of consecutive registers necessary to read
+                    },
+                'Barcode': one point production data in this example containing the barcode of a given piece
+                    {
+                        'address': list of addresses in plc containing a specific production data
+                        'type': variable type
+                        'size': length of consecutive registers necessary to read
+                    },
+
+            },
+    },
+'endpoints_constant_data': each point of the data report additionally contains constant data, here the values ​​and type of constant data for a given endpoint are specified
+    {
+        'SC_Charge': iven endpoint
+            {
+                'constant_ok_part_data': constant values ​​for OK elements
+                'constant_ng_part_data': constant values ​​for NG elements
+            },
+    },
+'endpoints_constructors': here the appearance of the final json is defined, which of all possible production data should be included in the final json sent to the API, and which constant data
+    {
+        'SC_Charge': given endpoint
+            {
+                'production_data': production data whose addresses and type are defined in endpoint_data_values,
+                'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
+                'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
+                'url': API address,
+            },
+    },
+'data_collection_signals_head': addresses of additional markers used in the script, but not production data
+    {
+        'SC_Charge': {'data collection': signal of the need to download production data, 'Ng Reason (Id)': when an NG piece occurs, a given error occurs on the machine, it is read for later AI analysis of the reasons for the occurrence of specific production data},
+    },
+},
+```
+
 # main.py
 
 When the software starts, machine classes are created according to the machines defined in conf.py.

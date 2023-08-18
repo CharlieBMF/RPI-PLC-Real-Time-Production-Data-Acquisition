@@ -182,4 +182,19 @@ The software has been divided into 3 main scripts:
 
 When the software starts, machine classes are created according to the machines defined in conf.py.
 
+``` python
+def create_machine_classes():
+    list_of_machines = []
+    for k, v in machines_names.items():
+        k = Machine(id_line=v['id_line'], id_machine=v['id_machine'], name=v['name'], ip=v['ip'], port=v['port'],
+                    endpoints=v['endpoints'],
+                    endpoints_data_values=v['endpoints_data_values'],
+                    endpoints_constant_data=v['endpoints_constant_data'],
+                    endpoints_constructors=v['endpoints_constructors'],
+                    data_collection_signals_head=v['data_collection_signals_head'],
+                    )
+        list_of_machines.append(k)
+    return list_of_machines
+```
+In the main loop of the program, each of the machines included in the production line is read. If the response from the PLC for the signals OK Report Flag or NG Report Flag is considered to be one, the data is downloaded, processed into appropriate types, json is created in accordance with the data from conf, and then sent to the api.
 

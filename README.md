@@ -198,3 +198,4 @@ def create_machine_classes():
 ```
 In the main loop of the program, each of the machines included in the production line is read. If the response from the PLC for the signals OK Report Flag or NG Report Flag is considered to be one, the data is downloaded, processed into appropriate types, json is created in accordance with the data from conf, and then sent to the api.
 
+

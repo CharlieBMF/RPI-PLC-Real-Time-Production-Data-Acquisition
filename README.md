@@ -207,7 +207,3 @@ In the main loop of the program, each of the machines included in the production
 
 
 
-
-
-
-

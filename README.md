@@ -202,7 +202,59 @@ In the main loop of the program, each of the machines included in the production
 
 A script containing a class handling all methods related to reporting from a machines.
 
+``` python
+class Machine:
+    """Class representing one Machine on the line"""
 
+    def __init__(self, id_line, id_machine, name, ip, port, endpoints, endpoints_data_values, endpoints_constant_data,
+                 data_collection_signals_head, endpoints_constructors, target_network=None,
+                 plc_id_in_target_network=None):
+        """
+        Init for class
+        :param id_line: id of a production line
+        :param id_machine: id of a machine
+        :param name: name of the machine
+        :param ip: IP address to connect to machine
+        :param port: open port for communication between the RaspberryPi and the machine
+        :param endpoints: list of a reporting endpoint on machine
+        :param endpoints_data_values: dict of names & specification of production data for each endpoint
+        :param endpoints_constant_data: constant data which should be added during reporting to API for each endpoint
+        depends on the OK or NG status. Include Result, Seriese, NG Count
+        :param data_collection_signals_head: head of addresses in PLC which is controlled also by the script during
+        exchanging data. Contains address for OK, NG and NG id. These addresses are reset by script after proper data
+        collection
+        :param endpoints_constructors: constructor which contains dictionary of data which should be included during
+        construction of json to API
+        :param target_network:it is possible to communicate using other communication protocols to other machines
+         on the line. If the RPI to PLC, it is possible to perform routing on the PLC for a different network number
+          and communicate with another PLC. This number determines to which network number routing should be performed
+        :param plc_id_in_target_network: id of the PLC on routed network
+        """
+        self.id_line = id_line
+        self.id_machine = id_machine
+        self.name = name
+        self.ip = ip
+        self.port = port
+        self.target_network = target_network
+        self.plc_id_in_target_network = plc_id_in_target_network
+        self.machine = self.define_machine_root()
+        self.endpoints = endpoints
+        self.endpoints_data_values = endpoints_data_values
+        self.endpoints_constant_data = endpoints_constant_data
+        self.endpoints_constructors = endpoints_constructors
+        self.data_collection_signals_head = data_collection_signals_head
+        self.plc_addresses_words = [self.endpoints_data_values[endpoint][data]['address']
+                                    for endpoint in self.endpoints
+                                    for data in self.endpoints_data_values[endpoint]
+                                    if self.endpoints_data_values[endpoint][data]['size'] != 2]
+        self.plc_addresses_dwords = [self.endpoints_data_values[endpoint][data]['address']
+                                     for endpoint in self.endpoints
+                                     for data in self.endpoints_data_values[endpoint]
+                                     if self.endpoints_data_values[endpoint][data]['size'] == 2]
+        self.plc_words_address_list = self.cumulate_words_addresses_into_list()
+        self.plc_dwords_address_list = self.cumulate_dwords_addresses_into_list()
+        self.words_keys, self.dwords_keys = self.generate_list_of_keys_for_address_lists()
+```
 
 
 

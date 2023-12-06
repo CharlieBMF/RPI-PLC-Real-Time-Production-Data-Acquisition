@@ -39,4 +39,4 @@ while True:
                         machine_class.report_data_to_api(endpoint_name, final_json)
                         machine_class.report_collection_data_completion_in_plc(endpoint_name)
     endo = time.time()
-    print(f'Full line loop time: {endo-starto}')
+    #print(f'Full line loop time: {endo-starto}')

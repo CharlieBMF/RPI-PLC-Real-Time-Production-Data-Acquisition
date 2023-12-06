@@ -2027,6 +2027,12 @@ machines_names = {
                                     'type': 'ascii',
                                     'size': 8
                                 },
+                            'Production lot':
+                                {
+                                    'address': ['W1D04', 'W1D05', 'W1D06', 'W1D07'],
+                                    'type': 'ascii',
+                                    'size': 4,
+                                }
                             # 'Ng Reason (Id)': 'XXXXX',
                         },
                     'Weight':
@@ -2228,7 +2234,7 @@ machines_names = {
                 {
                     'CL_Pasting':
                         {
-                            'production_data': ['Barcode', 'Caution Label Lot', 'Caution Label No'],
+                            'production_data': ['Barcode', 'Caution Label Lot', 'Caution Label No', 'Production lot'],
                             'constant_ok_part_data': ['Result', 'NG Count', 'Seriese'],
                             'constant_ng_part_data': ['Result', 'NG Count', 'Seriese'],
                             'url': 'http://hamster.dsse.local/EN3/PutData/FinalWeight',
@@ -2267,5 +2273,4 @@ machines_names = {
                     'ETest2': {'data collection': 'D407', 'Ng Reason (Id)': 'D427'},
                 },
         },
-
 }
